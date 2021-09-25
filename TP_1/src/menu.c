@@ -103,11 +103,20 @@ void mostrarResultados(int suma, int resta, float division, int multiplicacion, 
 	else if (validaciones[4] == FACTORIAL_NEGATIVO && validaciones[5] == FACTORIAL_NEGATIVO){
 		printf("e) NO se pudo calcular el factorial de A ni de B por ser negativos\n");
 	}
-	else if (validaciones[4] && validaciones[5] == FACTORIAL_NEGATIVO){
+	else if (validaciones[4] == FACTORIAL_CALCULADO && validaciones[5] == FACTORIAL_NEGATIVO){
 		printf("e) El factorial de A es: %lli y NO se pudo calcular factorial de B por ser negativo\n", factorialA);
 	}
-	else if (validaciones[4] == FACTORIAL_NEGATIVO && validaciones[5]){
+	else if (validaciones[4] == FACTORIAL_NEGATIVO && validaciones[5] == FACTORIAL_CALCULADO){
 		printf("e) NO se pudo calcular el factorial de A por ser negativo y el factorial de B es: %lli\n", factorialB);
+	}
+	else if (validaciones[4] == FACTORIAL_FUERA_DE_LIMITE && validaciones[5] == FACTORIAL_FUERA_DE_LIMITE){
+		printf("e) NO se pudo calcular el factorial de A ni de B por ser mayores a 20 y salirse de limite\n");
+	}
+	else if (validaciones[4] == FACTORIAL_CALCULADO && validaciones[5] == FACTORIAL_FUERA_DE_LIMITE){
+		printf("e) El factorial de A es: %lli y NO se pudo calcular factorial de B por ser mayor a 20 y salirse de limite\n", factorialA);
+	}
+	else if (validaciones[4] == FACTORIAL_FUERA_DE_LIMITE && validaciones[5] == FACTORIAL_CALCULADO){
+		printf("e) NO se pudo calcular el factorial de A por ser mayor a 20 y salirse de limite y el factorial de B es: %lli\n", factorialB);
 	}
 	else{
 		printf("e) El factorial de A es: %lli y El factorial de B es: %lli\n", factorialA, factorialB);

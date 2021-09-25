@@ -2,7 +2,9 @@
 #define OPERACIONESMATEMATICAS_H_
 
 #define DIVISION_POR_CERO -1
+#define FACTORIAL_CALCULADO 1
 #define FACTORIAL_NEGATIVO -1
+#define FACTORIAL_FUERA_DE_LIMITE -2
 
 /**
  * @brief Realiza la suma de dos numeros
@@ -49,7 +51,7 @@ int multiplicar(int a, int b, int* resultado);
  *
  * @param numero Numero a calcular el factorial
  * @param resultado Referencia a variabe resultado de la operacion
- * @return Estado la operacion: 1 si se pudo realizar - 0 si no se pudo realizar - -1 Error factorial de numero negativo
+ * @return Estado la operacion: 1 si se pudo realizar - 0 si no se pudo realizar - -1 Error factorial de numero negativo - -2 Error maximo numero es 20
  */
 int factorial(int numero, long long  int* resultado);
 

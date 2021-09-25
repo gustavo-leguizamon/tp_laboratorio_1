@@ -54,7 +54,10 @@ int factorial(int numero, long long  int* resultado){
 	int exito = 0;
 	unsigned long long int factorialCalculado = 0;
 
-	if (numero >= 0){
+	if (numero < 0){
+		exito = FACTORIAL_NEGATIVO;
+	}
+	else if (numero <= 20){
 		factorialCalculado = 1;
 		for (int i = 2; i <= numero; i++){
 			factorialCalculado *= i;
@@ -64,7 +67,7 @@ int factorial(int numero, long long  int* resultado){
 		exito = 1;
 	}
 	else{
-		exito = FACTORIAL_NEGATIVO;
+		exito = FACTORIAL_FUERA_DE_LIMITE;
 	}
 
 	return exito;
