@@ -18,7 +18,7 @@ int menu(int operandoA, int operandoB, int seIngresoOperandoA, int seIngresoOper
  * @param operando Referencia a la variable operando
  * @return 1: Indica que se pudo cargar el operando - 0: Indica que no
  */
-int cargarOperando(int* operando);
+int cargarOperando(int* pOperando);
 
 /**
  * @brief Calcula todas las operaciones matematicas

@@ -1,34 +1,34 @@
 #include <stdio.h>
 #include "operacionesMatematicas.h"
 
-int sumar(int a, int b, int* resultado){
+int sumar(int a, int b, int* pResultado){
 	int exito = 0;
 
-	if (resultado != NULL){
-		*resultado = a + b;
+	if (pResultado != NULL){
+		*pResultado = a + b;
 		exito = 1;
 	}
 
 	return exito;
 }
 
-int restar(int a, int b, int* resultado){
+int restar(int a, int b, int* pResultado){
 	int exito = 0;
 
-	if (resultado != NULL){
-		*resultado = a - b;
+	if (pResultado != NULL){
+		*pResultado = a - b;
 		exito = 1;
 	}
 
 	return exito;
 }
 
-int dividir(int a, int b, float* resultado){
+int dividir(int a, int b, float* pResultado){
 	int exito = 0;
 
-	if (resultado != NULL){
+	if (pResultado != NULL){
 		if (b != 0){
-			*resultado = (float)a / b;
+			*pResultado = (float)a / b;
 			exito = 1;
 		}
 		else{
@@ -39,18 +39,18 @@ int dividir(int a, int b, float* resultado){
 	return exito;
 }
 
-int multiplicar(int a, int b, int* resultado){
+int multiplicar(int a, int b, int* pResultado){
 	int exito = 0;
 
-	if (resultado != NULL){
-		*resultado = a * b;
+	if (pResultado != NULL){
+		*pResultado = a * b;
 		exito = 1;
 	}
 
 	return exito;
 }
 
-int factorial(int numero, long long  int* resultado){
+int factorial(int numero, long long  int* pResultado){
 	int exito = 0;
 	unsigned long long int factorialCalculado = 0;
 
@@ -63,7 +63,7 @@ int factorial(int numero, long long  int* resultado){
 			factorialCalculado *= i;
 		}
 
-		*resultado = factorialCalculado;
+		*pResultado = factorialCalculado;
 		exito = 1;
 	}
 	else{

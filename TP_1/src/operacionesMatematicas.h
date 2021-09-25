@@ -14,7 +14,7 @@
  * @param resultado Referencia a variabe resultado de la operacion
  * @return Estado la operacion: 1 si se pudo realizar - 0 si no se pudo realizar
  */
-int sumar(int a, int b, int* resultado);
+int sumar(int a, int b, int* pResultado);
 
 /**
  * @brief Realiza la resta de dos numeros
@@ -24,7 +24,7 @@ int sumar(int a, int b, int* resultado);
  * @param resultado Referencia a variabe resultado de la operacion
  * @return Estado la operacion: 1 si se pudo realizar - 0 si no se pudo realizar
  */
-int restar(int a, int b, int* resultado);
+int restar(int a, int b, int* pResultado);
 
 /**
  * @brief Realiza la division de dos numeros
@@ -34,7 +34,7 @@ int restar(int a, int b, int* resultado);
  * @param resultado Referencia a variabe resultado de la operacion
  * @return Estado la operacion: 1 si se pudo realizar - 0 si no se pudo realizar - -1 Error division por cero
  */
-int dividir(int a, int b, float* resultado);
+int dividir(int a, int b, float* pResultado);
 
 /**
  * @brief Realiza la multiplicacion de dos numeros
@@ -44,7 +44,7 @@ int dividir(int a, int b, float* resultado);
  * @param resultado Referencia a variabe resultado de la operacion
  * @return Estado la operacion: 1 si se pudo realizar - 0 si no se pudo realizar
  */
-int multiplicar(int a, int b, int* resultado);
+int multiplicar(int a, int b, int* pResultado);
 
 /**
  * @brief Calcula el factorial de un numero
@@ -53,6 +53,6 @@ int multiplicar(int a, int b, int* resultado);
  * @param resultado Referencia a variabe resultado de la operacion
  * @return Estado la operacion: 1 si se pudo realizar - 0 si no se pudo realizar - -1 Error factorial de numero negativo - -2 Error maximo numero es 20
  */
-int factorial(int numero, long long  int* resultado);
+int factorial(int numero, long long  int* pResultado);
 
 #endif /* OPERACIONESMATEMATICAS_H_ */

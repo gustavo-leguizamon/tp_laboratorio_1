@@ -29,13 +29,15 @@ int menu(int operandoA, int operandoB, int seIngresoOperandoA, int seIngresoOper
 	return opcionSeleccionada;
 }
 
-int cargarOperando(int* operando){
-	int exito;
+int cargarOperando(int* pOperando){
+	int exito = 0;
 
-	printf("Ingrese el operando\n");
-	exito = scanf("%d", operando);
-	if (!exito){
-		printf("No se pudo cargar el operando\n");
+	if (pOperando != NULL){
+		printf("Ingrese el operando\n");
+		exito = scanf("%d", pOperando);
+		if (!exito){
+			printf("No se pudo cargar el operando\n");
+		}
 	}
 
 	return exito;
