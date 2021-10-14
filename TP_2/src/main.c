@@ -5,8 +5,6 @@
 #include "menu.h"
 
 #define LEN 1000
-//#define NONE     0
-//#define REGISTER 1
 
 int main(void) {
 	setbuf(stdout, NULL);
@@ -14,13 +12,13 @@ int main(void) {
 	Employee employees[LEN];
 
 	char seguir = 's';
-	//int lastAction = NONE;
 
-	int nextId = 0000;
+	int nextId = 0;
 	char name[51];
 	char lastName[51];
 	float salary;
 	int sector;
+	int idToRemove;
 
 	if (initEmployees(employees, LEN)){
 		do{
@@ -28,15 +26,16 @@ int main(void) {
 
 			switch(menu()){
 				case REGISTER_EMPLOYEE:
-					printf("     *** ALTA EMPLEADO ***          \n\n");
 					if (chargeDataEmployee(&nextId, name, lastName, &salary, &sector)){
 						if (addEmployee(employees, LEN, nextId, name, lastName, salary, sector) == 0){
-							//lastAction = REGISTER;
-							printf("Alta exitosa!!!\n\n");
+							puts("Alta exitosa!!!\n");
 						}
 						else{
-							printf("No se pudo realizar el alta\n");
+							puts("No se pudo realizar el alta");
 						}
+					}
+					else{
+						puts("No se pudo cargar los datos ingresados");
 					}
 					break;
 				case EDIT_EMPLOYEE:
@@ -48,21 +47,34 @@ int main(void) {
 					}*/
 					break;
 				case DELETE_EMPLOYEE:
-					printf("Baja empleado\n");
+					if (thereIsAnyEmployee(employees, LEN)){
+						idToRemove = getID();
+						if (removeEmployee(employees, LEN, idToRemove) == 0){
+							puts("Baja exitosa!!!\n");
+						}
+						else{
+							puts("No se pudo dar de baja el empleado");
+						}
+					}
+					else{
+						puts("No hay empleados para dar de baja\n");
+					}
 					break;
 				case REPORT:
 					if (thereIsAnyEmployee(employees, LEN)){
-						printEmployees(employees, LEN);
+						if (!printEmployees(employees, LEN)){
+							puts("No se pudo mostrar los empleados");
+						}
 					}
 					else{
-						puts("No hay empleados para mostrar\n\n");
+						puts("No hay empleados para mostrar\n");
 					}
 					break;
 				case EXIT:
 					seguir = 'n';
 					break;
 				default:
-					printf("Opcion invalida\n");
+					puts("Opcion invalida");
 					break;
 			}
 
@@ -70,7 +82,7 @@ int main(void) {
 		} while (seguir == 's');
 	}
 	else{
-		printf("No se pudo inicializar el array de empleados\n");
+		puts("No se pudo inicializar el array de empleados");
 	}
 
 	return EXIT_SUCCESS;

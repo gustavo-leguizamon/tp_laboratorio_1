@@ -5,6 +5,8 @@ int getInt(char message[], int* input);
 
 int getFloat(char message[], float* input);
 
+int getChar(char message[], char* input);
+
 int getString(char message[], char input[], int len);
 
 #endif /* INPUT_H_ */

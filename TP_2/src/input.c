@@ -9,8 +9,15 @@ int getInt(char message[], int* input){
 
 	if (input != NULL){
 		printf("%s", message);
-		scanf("%d", input);
-		success = 1;
+
+		success = scanf("%d", input);
+
+		while (!success){
+			puts("Dato invalido. Debe ingresar un numero.");
+			printf("%s", message);
+			fflush(stdin);
+			success = scanf("%d", input);
+		}
 	}
 
 	return success;
@@ -21,7 +28,27 @@ int getFloat(char message[], float* input){
 
 	if (input != NULL){
 		printf("%s", message);
-		scanf("%f", input);
+
+		success = scanf("%f", input);
+
+		while (!success){
+			puts("Dato invalido. Debe ingresar un numero.");
+			printf("%s", message);
+			fflush(stdin);
+			success = scanf("%f", input);
+		}
+	}
+
+	return success;
+}
+
+int getChar(char message[], char* input){
+	int success = 0;
+
+	if (input != NULL){
+		printf("%s", message);
+		fflush(stdin);
+		scanf("%c", input);
 
 		success = 1;
 	}

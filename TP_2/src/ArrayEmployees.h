@@ -63,6 +63,32 @@ int addEmployee(Employee* list, int len, int id, char name[], char lastName[], f
  */
 int chargeDataEmployee(int* id, char name[], char lastName[], float* salary, int* sector);
 
+
+/**
+ * @brief find an Employee by Id and returns the index position in array.
+ *
+ * @param list Employee*
+ * @param len int
+ * @param id int
+ * @return Return employee index position or (-1) if [Invalid length or NULL pointer received or employee not found]
+ */
+int findEmployeeById(Employee* list, int len, int id);
+
+
+/**
+ * @brief Remove an Employee by Id (put isEmpty Flag in 1)
+ *
+ * @param list Employee*
+ * @param len int
+ * @param id int
+ * @return Return (-1) if Error [Invalid length or NULL pointer or if can't find a employee] - (0) if Ok
+ */
+int removeEmployee(Employee* list, int len, int id);
+
+
+
+int getID(void);
+
 int thereIsAnyEmployee(Employee* list, int len);
 
 void printEmployee(Employee employee);
