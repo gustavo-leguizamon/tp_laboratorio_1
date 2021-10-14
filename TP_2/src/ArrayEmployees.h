@@ -48,4 +48,30 @@ int findFreeSpace(Employee* list, int len);
  * @param sector int
  * @return int Return (-1) if Error [Invalid length or NULL pointer or without free space] - (0) if Ok
  */
-int addEmployee(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector);
+int addEmployee(Employee* list, int len, int id, char name[], char lastName[], float salary, int sector);
+
+
+/**
+ * @brief Gets data for an employee
+ *
+ * @param id int*
+ * @param name char[]
+ * @param lastName char[]
+ * @param salary float*
+ * @param sector int*
+ * @return 0: if fail - 1: if success
+ */
+int chargeDataEmployee(int* id, char name[], char lastName[], float* salary, int* sector);
+
+int thereIsAnyEmployee(Employee* list, int len);
+
+void printEmployee(Employee employee);
+
+/**
+ * @brief print the content of employees array
+ *
+ * @param list Employee*
+ * @param length int
+ * @return int
+ */
+int printEmployees(Employee* list, int length);
