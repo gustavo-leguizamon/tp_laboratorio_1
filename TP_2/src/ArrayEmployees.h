@@ -4,6 +4,12 @@
 #define EMPTY 1
 #define FILL  0
 
+enum eSector {
+	Administration,
+	RRHH,
+	Infrastructure
+};
+
 typedef struct {
 	int id;
 	char name[51];

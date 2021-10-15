@@ -135,6 +135,11 @@ int chargeDataEmployee(int* pId, char pName[], char pLastName[], float* pSalary,
 		getString("Ingrese nombre: ", pName, 51);
 		getString("Ingrese apellido: ", pLastName, 51);
 		getFloat("Ingrese salario: ", pSalary);
+
+		while (*pSalary < 0){
+			getFloat("Ingrese salario mayor a cero: ", pSalary);
+		}
+
 		getInt("Ingrese sector: ", pSector);
 
 		success = 1;
