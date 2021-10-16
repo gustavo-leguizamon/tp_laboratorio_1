@@ -107,11 +107,13 @@ int sortEmployees(Employee* list, int len, int order){
 	int success = -1;
 	Employee auxEmployee;
 
-	if (list != NULL && len > 0){
+	if (list != NULL && len > 0 && (order == 0 || order == 1)){
 		for (int i = 0; i < len - 1; i++){
 			for (int j = i + 1; j < len; j++){
-				if ((strcmp((list + i)->lastName, (list + j)->lastName) == 1) ||
-					(strcmp((list + i)->lastName, (list + j)->lastName) == 0 && (list + i)->sector > (list + j)->sector)){
+				if ((strcmp((list + i)->lastName, (list + j)->lastName) == 1 && order) ||
+					(strcmp((list + i)->lastName, (list + j)->lastName) == 0 && (list + i)->sector > (list + j)->sector && order) ||
+					(strcmp((list + i)->lastName, (list + j)->lastName) == -1 && !order) ||
+					(strcmp((list + i)->lastName, (list + j)->lastName) == 0 && (list + i)->sector < (list + j)->sector && !order)){
 					auxEmployee = *(list + i);
 					*(list + i) = *(list + j);
 					*(list + j) = auxEmployee;
@@ -223,7 +225,7 @@ int printEmployees(Employee* list, int length)
 		puts("    *** LISTA DE EMPLEADOS ***     ");
 		printHeaderEmployee();
 
-		sortEmployees(list, length, UP);
+		sortEmployees(list, length, DOWN); //PEDIR POR CONSOLA EL ORDENAMIENTO
 
 		for (int i = 0; i < length; i++){
 			if (!(list + i)->isEmpty){
