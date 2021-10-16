@@ -109,6 +109,18 @@ int getID(void){
 	return id;
 }
 
+Employee* getEmployee(Employee* list, int len, int id){
+	Employee* employee;
+	int indexEmployee;
+
+	indexEmployee = findEmployeeById(list, len, id);
+	if (indexEmployee >= 0){
+		employee = (list + indexEmployee);
+	}
+
+	return employee;
+}
+
 int findFreeSpace(Employee* list, int len){
 	int posFreeSpace = -1;
 
@@ -148,12 +160,20 @@ int chargeDataEmployee(int* pId, char pName[], char pLastName[], float* pSalary,
 	return success;
 }
 
+void printHeaderEmployee(){
+	puts(" _________________________________________________________________________________________________________________________________");
+	puts("| ID    | Apellido                                 | Nombre                                   | Salario         | Sector          |");
+	puts("|_______|__________________________________________|__________________________________________|_________________|_________________|");
+}
+
 void printEmployee(Employee employee){
-	printf("%d     %s      %s      %.2f      %d\n", employee.id,
+	  //puts(" _________________________________________________________________________________________________");
+	printf("| %04d  | %-40s | %-40s | %15.2f | %-15d |\n", employee.id,
 													employee.lastName,
 													employee.name,
 													employee.salary,
 													employee.sector);
+	  puts("|_______|__________________________________________|__________________________________________|_________________|_________________|");
 }
 
 int thereIsAnyEmployee(Employee* list, int len){
@@ -177,9 +197,7 @@ int printEmployees(Employee* list, int length)
 
 	if (list != NULL && length > 0){
 		puts("    *** LISTA DE EMPLEADOS ***     ");
-		puts("-----------------------------------");
-		puts("id     apellido    nombre   salario     sector");
-		puts("-----------------------------------");
+		printHeaderEmployee();
 
 		for (int i = 0; i < length; i++){
 			if (!(list + i)->isEmpty){
@@ -188,6 +206,112 @@ int printEmployees(Employee* list, int length)
 		}
 
 		success  = 1;
+	}
+
+	return success;
+}
+
+int validateSalary(float salary){
+	int valid = -1;
+
+	if (salary > 0){
+		valid = 0;
+	}
+
+	return valid;
+}
+
+/*
+int editEmployee(Employee* list, int len, int id){
+	int success = -1;
+	int indexEmployee;
+
+	if (list != NULL && len > 0){
+		puts("     *** MODIFICACION EMPLEADO ***          ");
+
+		indexEmployee = findEmployeeById(list, len, id);
+		if (indexEmployee == -1){
+			printf("No existe empleado con id: %d\n", id);
+		}
+		else{
+			puts("    *** EMPLEADO ***     ");
+			puts("-----------------------------------");
+			puts("id     apellido    nombre   salario     sector");
+			puts("-----------------------------------");
+			printEmployee(*(list + indexEmployee));
+
+
+
+			if (confirmRemove == 's'){
+				(list + indexEmployee)->isEmpty = EMPTY;
+				success = 0;
+			}
+			else{
+				puts("Baja cancelada por el usuario");
+			}
+		}
+	}
+
+	return success;
+}
+*/
+
+int editName(Employee* employee, int len){
+	int success = -1;
+	char auxName[len];
+
+	if (employee != NULL && len > 0){
+		getString("Ingrese el nuevo nombre: ", auxName, len);
+
+		strcpy(employee->name, auxName);
+		success = 0;
+	}
+
+	return success;
+}
+
+int editLastName(Employee* employee, int len){
+	int success = -1;
+	char auxLastName[len];
+
+	if (employee != NULL && len > 0){
+		getString("Ingrese el nuevo apellido: ", auxLastName, len);
+
+		strcpy(employee->lastName, auxLastName);
+		success = 0;
+	}
+
+	return success;
+}
+
+int editSalary(Employee* employee){
+	int success = -1;
+	float auxSalary;
+
+	if (employee != NULL){
+		getFloat("Ingrese el nuevo salario: ", &auxSalary);
+
+		while(validateSalary(auxSalary) < 0){
+			puts("El salario no es valido");
+			getFloat("Ingrese el nuevo salario: ", &auxSalary);
+		}
+
+		employee->salary = auxSalary;
+		success = 0;
+	}
+
+	return success;
+}
+
+int editSector(Employee* employee){
+	int success = -1;
+	int auxSector;
+
+	if (employee != NULL){
+		getInt("Ingrese el nuevo sector: ", &auxSector);
+
+		employee->sector = auxSector;
+		success = 0;
 	}
 
 	return success;

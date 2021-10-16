@@ -91,11 +91,26 @@ int findEmployeeById(Employee* list, int len, int id);
  */
 int removeEmployee(Employee* list, int len, int id);
 
+int validateSalary(float salary);
 
+
+//int editEmployee(Employee* list, int len, int id);
+
+int editName(Employee* employee, int len);
+
+int editLastName(Employee* employee, int len);
+
+int editSalary(Employee* employee);
+
+int editSector(Employee* employee);
 
 int getID(void);
 
+Employee* getEmployee(Employee* list, int len, int id);
+
 int thereIsAnyEmployee(Employee* list, int len);
+
+void printHeaderEmployee();
 
 void printEmployee(Employee employee);
 
