@@ -110,7 +110,7 @@ int getID(void){
 }
 
 Employee* getEmployee(Employee* list, int len, int id){
-	Employee* employee;
+	Employee* employee = NULL;
 	int indexEmployee;
 
 	indexEmployee = findEmployeeById(list, len, id);

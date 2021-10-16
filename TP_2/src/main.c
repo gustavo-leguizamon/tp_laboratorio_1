@@ -52,51 +52,57 @@ int main(void) {
 						idInput = getID();
 						employee = getEmployee(employees, LEN, idInput);
 						printHeaderEmployee();
-						printEmployee(*employee);
+						if (employee == NULL){
+							printf("No existe empleado con ID: %d\n", idInput);
+						}
+						else{
+							printEmployee(*employee);
 
-						do{
-							switch(submenuEdit()){
-								case Name:
-									if (editName(employee, 51) == 0){
-										puts("Modificacion exitosa!!!");
-									}
-									else{
-										puts("No se pudo modificar el nombre del empleado");
-									}
-									break;
-								case LastName:
-									if (editLastName(employee, 51) == 0){
-										puts("Modificacion exitosa!!!");
-									}
-									else{
-										puts("No se pudo modificar el apellido del empleado");
-									}
-									break;
-								case Salary:
-									if (editSalary(employee) == 0){
-										puts("Modificacion exitosa!!!");
-									}
-									else{
-										puts("No se pudo modificar el salario del empleado");
-									}
-									break;
-								case Sector:
-									if (editSector(employee) == 0){
-										puts("Modificacion exitosa!!!");
-									}
-									else{
-										puts("No se pudo modificar el sector del empleado");
-									}
-									break;
-								case ExitEditMenu:
-									keepEditing = 'n';
-									break;
-								default:
-									puts("Opcion invalida");
-									break;
-							}
-						} while (keepEditing == 's');
+							keepEditing = 's';
 
+							do{
+								switch(submenuEdit()){
+									case Name:
+										if (editName(employee, 51) == 0){
+											puts("Modificacion exitosa!!!");
+										}
+										else{
+											puts("No se pudo modificar el nombre del empleado");
+										}
+										break;
+									case LastName:
+										if (editLastName(employee, 51) == 0){
+											puts("Modificacion exitosa!!!");
+										}
+										else{
+											puts("No se pudo modificar el apellido del empleado");
+										}
+										break;
+									case Salary:
+										if (editSalary(employee) == 0){
+											puts("Modificacion exitosa!!!");
+										}
+										else{
+											puts("No se pudo modificar el salario del empleado");
+										}
+										break;
+									case Sector:
+										if (editSector(employee) == 0){
+											puts("Modificacion exitosa!!!");
+										}
+										else{
+											puts("No se pudo modificar el sector del empleado");
+										}
+										break;
+									case ExitEditMenu:
+										keepEditing = 'n';
+										break;
+									default:
+										puts("Opcion invalida");
+										break;
+								}
+							} while (keepEditing == 's');
+						}
 
 
 						//if (editEmployee(employees, LEN, idInput) == 0){
