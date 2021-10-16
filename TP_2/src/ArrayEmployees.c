@@ -103,6 +103,30 @@ int removeEmployee(Employee* list, int len, int id){
 }
 
 
+int sortEmployees(Employee* list, int len, int order){
+	int success = -1;
+	Employee auxEmployee;
+
+	if (list != NULL && len > 0){
+		for (int i = 0; i < len - 1; i++){
+			for (int j = i + 1; j < len; j++){
+				if ((strcmp((list + i)->lastName, (list + j)->lastName) == 1) ||
+					(strcmp((list + i)->lastName, (list + j)->lastName) == 0 && (list + i)->sector > (list + j)->sector)){
+					auxEmployee = *(list + i);
+					*(list + i) = *(list + j);
+					*(list + j) = auxEmployee;
+				}
+			}
+		}
+
+		success = 0;
+	}
+
+	return success;
+}
+
+
+
 int getID(void){
 	int id;
 	getInt("Ingrese el numero de ID: ", &id);
@@ -198,6 +222,8 @@ int printEmployees(Employee* list, int length)
 	if (list != NULL && length > 0){
 		puts("    *** LISTA DE EMPLEADOS ***     ");
 		printHeaderEmployee();
+
+		sortEmployees(list, length, UP);
 
 		for (int i = 0; i < length; i++){
 			if (!(list + i)->isEmpty){

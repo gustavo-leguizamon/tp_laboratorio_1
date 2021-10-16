@@ -1,8 +1,10 @@
 #ifndef ARRAYEMPLOYEES_H_
 #define ARRAYEMPLOYEES_H_
 
-#define EMPTY 1
 #define FILL  0
+#define EMPTY 1
+#define DOWN 0
+#define UP   1
 
 enum eSector {
 	Administration,
@@ -90,6 +92,21 @@ int findEmployeeById(Employee* list, int len, int id);
  * @return Return (-1) if Error [Invalid length or NULL pointer or if can't find a employee] - (0) if Ok
  */
 int removeEmployee(Employee* list, int len, int id);
+
+
+/**
+ * @brief Sort the elements in the array of employees, the argument order
+ *        indicate UP or DOWN order
+ *
+ * @param list Employee*
+ * @param len int
+ * @param order int [1] indicate UP - [0] indicate DOWN
+ * @return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+ */
+int sortEmployees(Employee* list, int len, int order);
+
+
+
 
 int validateSalary(float salary);
 

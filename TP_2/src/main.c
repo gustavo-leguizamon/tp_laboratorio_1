@@ -193,5 +193,15 @@ void hardCodeEmployees(Employee* list, int len, int* id){
 		(list + i)->salary = 50000;
 		(list + i)->sector = 3;
 		(list + i)->isEmpty = FILL;
+
+
+		i = 3;
+		*id = *id + 1;
+		(list + i)->id = *id;
+		strcpy((list + i)->name, "Richard");
+		strcpy((list + i)->lastName, "Lopez");
+		(list + i)->salary = 50000;
+		(list + i)->sector = 5;
+		(list + i)->isEmpty = FILL;
 	}
 }
