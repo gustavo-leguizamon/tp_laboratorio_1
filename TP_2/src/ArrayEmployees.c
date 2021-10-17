@@ -194,7 +194,7 @@ void printHeaderEmployee(){
 
 void printEmployee(Employee employee){
 	  //puts(" _________________________________________________________________________________________________");
-	printf("| %04d  | %-40s | %-40s | %15.2f | %-15d |\n", employee.id,
+	printf("| %04d  | %-40s | %-40s | $%14.2f | %-15d |\n", employee.id,
 													employee.lastName,
 													employee.name,
 													employee.salary,
@@ -220,6 +220,9 @@ int thereIsAnyEmployee(Employee* list, int len){
 int printEmployees(Employee* list, int length)
 {
 	int success = 0;
+	float totalSalary;
+	float averageSalary;
+	int totalEmpleyeesWhoExceedTheAverageSalary;
 
 	if (list != NULL && length > 0){
 		puts("    *** LISTA DE EMPLEADOS ***     ");
@@ -232,6 +235,14 @@ int printEmployees(Employee* list, int length)
 				printEmployee(*(list + i));
 			}
 		}
+
+		calcTotalSalary(list, length, &totalSalary);
+		calcAverageSalary(list, length, &averageSalary);
+		numberEmployeesWhoExceedTheAverageSalary(list, length, &totalEmpleyeesWhoExceedTheAverageSalary);
+
+		printf("El total de salarios es: $%.2f\n", totalSalary);
+		printf("El salario promedio es: $%.2f\n", averageSalary);
+		printf("La cantidad de empleados que superan el salario promedio es: %d\n", totalEmpleyeesWhoExceedTheAverageSalary);
 
 		success  = 1;
 	}
@@ -339,6 +350,69 @@ int editSector(Employee* employee){
 		getInt("Ingrese el nuevo sector: ", &auxSector);
 
 		employee->sector = auxSector;
+		success = 0;
+	}
+
+	return success;
+}
+
+
+int calcTotalSalary(Employee* list, int len, float* pTotal){
+	int success = -1;
+	float auxTotal = 0;
+
+	if (list != NULL && len > 0 && pTotal != NULL){
+		for (int i = 0; i < len; i++){
+			if ((list + i)->isEmpty == FILL){
+				auxTotal += (list + i)->salary;
+			}
+		}
+
+		*pTotal = auxTotal;
+		success = 0;
+	}
+
+	return success;
+}
+
+int calcAverageSalary(Employee* list, int len, float* pAverage){
+	int success = -1;
+	int auxAmountEmployees = 0;
+	float totalSalary;
+
+	if (list != NULL && len > 0 && pAverage != NULL){
+		calcTotalSalary(list, len, &totalSalary);
+
+		for (int i = 0; i < len; i++){
+			if ((list + i)->isEmpty == FILL){
+				auxAmountEmployees++;
+			}
+		}
+
+		*pAverage = totalSalary / auxAmountEmployees;
+		success = 0;
+	}
+
+	return success;
+}
+
+int numberEmployeesWhoExceedTheAverageSalary(Employee* list, int len, int* pAmountEmployees){
+	int success = -1;
+	int auxAmountEmployees = 0;
+	float totalSalary;
+	float averageSalary;
+
+	if (list != NULL && len > 0 && pAmountEmployees != NULL){
+		calcTotalSalary(list, len, &totalSalary);
+		calcAverageSalary(list, len, &averageSalary);
+
+		for (int i = 0; i < len; i++){
+			if ((list + i)->isEmpty == FILL && (list + i)->salary > averageSalary){
+				auxAmountEmployees++;
+			}
+		}
+
+		*pAmountEmployees = auxAmountEmployees;
 		success = 0;
 	}
 

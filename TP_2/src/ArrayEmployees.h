@@ -107,6 +107,13 @@ int sortEmployees(Employee* list, int len, int order);
 
 
 
+int calcTotalSalary(Employee* list, int len, float* pTotal);
+
+
+int calcAverageSalary(Employee* list, int len, float* pAverage);
+
+int numberEmployeesWhoExceedTheAverageSalary(Employee* list, int len, int* pAmountEmployees);
+
 
 int validateSalary(float salary);
 
