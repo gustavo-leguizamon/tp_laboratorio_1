@@ -3,18 +3,19 @@
 #include <ctype.h>
 #include <string.h>
 
+#include "functions.h"
 #include "input.h"
 #include "ArrayEmployees.h"
 
 int initEmployees(Employee* list, int len){
-	int success = 0;
+	int success = -1;
 
 	if (list != NULL && len > 0){
 		for (int i = 0; i < len; i++){
 			(list + i)->isEmpty = EMPTY;
 		}
 
-		success = 1;
+		success = EXEC_OK;
 	}
 
 	return success;
@@ -39,7 +40,7 @@ int addEmployee(Employee* list, int len, int id, char name[], char lastName[], f
 
 			*(list + freeIndex) = auxEmployee;
 
-			success = 0;
+			success = EXEC_OK;
 		}
 	}
 
@@ -91,7 +92,7 @@ int removeEmployee(Employee* list, int len, int id){
 
 			if (confirmRemove == 's'){
 				(list + indexEmployee)->isEmpty = EMPTY;
-				success = 0;
+				success = EXEC_OK;
 			}
 			else{
 				puts("Baja cancelada por el usuario");
@@ -121,12 +122,11 @@ int sortEmployees(Employee* list, int len, int order){
 			}
 		}
 
-		success = 0;
+		success = EXEC_OK;
 	}
 
 	return success;
 }
-
 
 
 int getID(void){
@@ -134,6 +134,7 @@ int getID(void){
 	getInt("Ingrese el numero de ID: ", &id);
 	return id;
 }
+
 
 Employee* getEmployee(Employee* list, int len, int id){
 	Employee* employee = NULL;
@@ -146,6 +147,7 @@ Employee* getEmployee(Employee* list, int len, int id){
 
 	return employee;
 }
+
 
 int findFreeSpace(Employee* list, int len){
 	int posFreeSpace = -1;
@@ -163,34 +165,47 @@ int findFreeSpace(Employee* list, int len){
 }
 
 
-
 int chargeDataEmployee(int* pId, char pName[], char pLastName[], float* pSalary, int* pSector){
-	int success = 0;
+	int success = -1;
 
 	if (pId != NULL && pName != NULL && pLastName != NULL && pSalary != NULL && pSector != NULL){
 		puts("     *** ALTA EMPLEADO ***          ");
-		*pId += 1;
-		getString("Ingrese nombre: ", pName, 51);
-		getString("Ingrese apellido: ", pLastName, 51);
-		getFloat("Ingrese salario: ", pSalary);
 
-		while (*pSalary < 0){
-			getFloat("Ingrese salario mayor a cero: ", pSalary);
+		*pId += 1;
+
+		getString("Ingrese nombre: ", pName, 51);
+		while (!validateName(pName)){
+			puts("El nombre no es valido");
+			getString("Ingrese nombre: ", pName, 51);
+		}
+
+		getString("Ingrese apellido: ", pLastName, 51);
+		while (!validateLastname(pLastName)){
+			puts("El apellido no es valido");
+			getString("Ingrese apellido: ", pLastName, 51);
+		}
+
+		getFloat("Ingrese salario: ", pSalary);
+		while (!validateSalary(*pSalary)){
+			puts("El salario ingresado no es valido");
+			getFloat("Ingrese salario: ", pSalary);
 		}
 
 		getInt("Ingrese sector: ", pSector);
 
-		success = 1;
+		success = EXEC_OK;
 	}
 
 	return success;
 }
+
 
 void printHeaderEmployee(){
 	puts(" _________________________________________________________________________________________________________________________________");
 	puts("| ID    | Apellido                                 | Nombre                                   | Salario         | Sector          |");
 	puts("|_______|__________________________________________|__________________________________________|_________________|_________________|");
 }
+
 
 void printEmployee(Employee employee){
 	  //puts(" _________________________________________________________________________________________________");
@@ -201,6 +216,7 @@ void printEmployee(Employee employee){
 													employee.sector);
 	  puts("|_______|__________________________________________|__________________________________________|_________________|_________________|");
 }
+
 
 int thereIsAnyEmployee(Employee* list, int len){
 	int any = 0;
@@ -217,9 +233,10 @@ int thereIsAnyEmployee(Employee* list, int len){
 	return any;
 }
 
+
 int printEmployees(Employee* list, int length)
 {
-	int success = 0;
+	int success = -1;
 	float totalSalary;
 	float averageSalary;
 	int totalEmpleyeesWhoExceedTheAverageSalary;
@@ -244,56 +261,59 @@ int printEmployees(Employee* list, int length)
 		printf("El salario promedio es: $%.2f\n", averageSalary);
 		printf("La cantidad de empleados que superan el salario promedio es: %d\n", totalEmpleyeesWhoExceedTheAverageSalary);
 
-		success  = 1;
+		success  = EXEC_OK;
 	}
 
 	return success;
 }
 
+
 int validateSalary(float salary){
-	int valid = -1;
+	int valid = 0;
 
 	if (salary > 0){
-		valid = 0;
+		valid = 1;
 	}
 
 	return valid;
 }
 
-/*
-int editEmployee(Employee* list, int len, int id){
-	int success = -1;
-	int indexEmployee;
 
-	if (list != NULL && len > 0){
-		puts("     *** MODIFICACION EMPLEADO ***          ");
+int validateName(char name[]){
+	int valid = 0;
+	int index = 1;
 
-		indexEmployee = findEmployeeById(list, len, id);
-		if (indexEmployee == -1){
-			printf("No existe empleado con id: %d\n", id);
-		}
-		else{
-			puts("    *** EMPLEADO ***     ");
-			puts("-----------------------------------");
-			puts("id     apellido    nombre   salario     sector");
-			puts("-----------------------------------");
-			printEmployee(*(list + indexEmployee));
-
-
-
-			if (confirmRemove == 's'){
-				(list + indexEmployee)->isEmpty = EMPTY;
-				success = 0;
+	if (name != NULL){
+		while (name[index] != '\0'){
+			if (!isalpha(name[index])){
+				valid = 0;
+				break;
 			}
-			else{
-				puts("Baja cancelada por el usuario");
-			}
+			index++;
 		}
 	}
 
-	return success;
+	return valid;
 }
-*/
+
+
+int validateLastname(char lastname[]){
+	int valid = 0;
+	int index = 1;
+
+	if (lastname != NULL){
+		while (lastname[index] != '\0'){
+			if (!isalpha(lastname[index])){
+				valid = 0;
+				break;
+			}
+			index++;
+		}
+	}
+
+	return valid;
+}
+
 
 int editName(Employee* employee, int len){
 	int success = -1;
@@ -301,13 +321,18 @@ int editName(Employee* employee, int len){
 
 	if (employee != NULL && len > 0){
 		getString("Ingrese el nuevo nombre: ", auxName, len);
+		while (!validateName(auxName)){
+			puts("El nombre no es valido");
+			getString("Ingrese el nuevo nombre: ", auxName, len);
+		}
 
 		strcpy(employee->name, auxName);
-		success = 0;
+		success = EXEC_OK;
 	}
 
 	return success;
 }
+
 
 int editLastName(Employee* employee, int len){
 	int success = -1;
@@ -315,13 +340,18 @@ int editLastName(Employee* employee, int len){
 
 	if (employee != NULL && len > 0){
 		getString("Ingrese el nuevo apellido: ", auxLastName, len);
+		while (!validateLastname(auxLastName)){
+			puts("El nombre no es valido");
+			getString("Ingrese el nuevo apellido: ", auxLastName, len);
+		}
 
 		strcpy(employee->lastName, auxLastName);
-		success = 0;
+		success = EXEC_OK;
 	}
 
 	return success;
 }
+
 
 int editSalary(Employee* employee){
 	int success = -1;
@@ -329,18 +359,18 @@ int editSalary(Employee* employee){
 
 	if (employee != NULL){
 		getFloat("Ingrese el nuevo salario: ", &auxSalary);
-
-		while(validateSalary(auxSalary) < 0){
+		while(!validateSalary(auxSalary)){
 			puts("El salario no es valido");
 			getFloat("Ingrese el nuevo salario: ", &auxSalary);
 		}
 
 		employee->salary = auxSalary;
-		success = 0;
+		success = EXEC_OK;
 	}
 
 	return success;
 }
+
 
 int editSector(Employee* employee){
 	int success = -1;
@@ -359,21 +389,22 @@ int editSector(Employee* employee){
 
 int calcTotalSalary(Employee* list, int len, float* pTotal){
 	int success = -1;
-	float auxTotal = 0;
+	float auxTotalSalary = 0;
 
 	if (list != NULL && len > 0 && pTotal != NULL){
 		for (int i = 0; i < len; i++){
 			if ((list + i)->isEmpty == FILL){
-				auxTotal += (list + i)->salary;
+				auxTotalSalary += (list + i)->salary;
 			}
 		}
 
-		*pTotal = auxTotal;
-		success = 0;
+		*pTotal = auxTotalSalary;
+		success = EXEC_OK;
 	}
 
 	return success;
 }
+
 
 int calcAverageSalary(Employee* list, int len, float* pAverage){
 	int success = -1;
@@ -390,11 +421,12 @@ int calcAverageSalary(Employee* list, int len, float* pAverage){
 		}
 
 		*pAverage = totalSalary / auxAmountEmployees;
-		success = 0;
+		success = EXEC_OK;
 	}
 
 	return success;
 }
+
 
 int numberEmployeesWhoExceedTheAverageSalary(Employee* list, int len, int* pAmountEmployees){
 	int success = -1;
@@ -413,7 +445,7 @@ int numberEmployeesWhoExceedTheAverageSalary(Employee* list, int len, int* pAmou
 		}
 
 		*pAmountEmployees = auxAmountEmployees;
-		success = 0;
+		success = EXEC_OK;
 	}
 
 	return success;

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "functions.h"
 #include "ArrayEmployees.h"
 #include "menu.h"
 
@@ -25,7 +26,7 @@ int main(void) {
 	int idInput;
 	Employee* employee;
 
-	if (initEmployees(employees, LEN)){
+	if (initEmployees(employees, LEN) == EXEC_OK){
 		hardCodeEmployees(employees, LEN, &nextId);
 
 		do{
@@ -34,8 +35,8 @@ int main(void) {
 			switch(menu()){
 				case RegisterEmployee:
 					puts("***   ALTA EMPLEDO   ***");
-					if (chargeDataEmployee(&nextId, name, lastName, &salary, &sector)){
-						if (addEmployee(employees, LEN, nextId, name, lastName, salary, sector) == 0){
+					if (chargeDataEmployee(&nextId, name, lastName, &salary, &sector) == EXEC_OK){
+						if (addEmployee(employees, LEN, nextId, name, lastName, salary, sector) == EXEC_OK){
 							puts("Alta exitosa!!!");
 						}
 						else{
@@ -63,7 +64,7 @@ int main(void) {
 							do{
 								switch(submenuEdit()){
 									case Name:
-										if (editName(employee, 51) == 0){
+										if (editName(employee, 51) == EXEC_OK){
 											puts("Modificacion exitosa!!!");
 										}
 										else{
@@ -71,7 +72,7 @@ int main(void) {
 										}
 										break;
 									case LastName:
-										if (editLastName(employee, 51) == 0){
+										if (editLastName(employee, 51) == EXEC_OK){
 											puts("Modificacion exitosa!!!");
 										}
 										else{
@@ -79,7 +80,7 @@ int main(void) {
 										}
 										break;
 									case Salary:
-										if (editSalary(employee) == 0){
+										if (editSalary(employee) == EXEC_OK){
 											puts("Modificacion exitosa!!!");
 										}
 										else{
@@ -87,7 +88,7 @@ int main(void) {
 										}
 										break;
 									case Sector:
-										if (editSector(employee) == 0){
+										if (editSector(employee) == EXEC_OK){
 											puts("Modificacion exitosa!!!");
 										}
 										else{
@@ -103,14 +104,6 @@ int main(void) {
 								}
 							} while (keepEditing == 's');
 						}
-
-
-						//if (editEmployee(employees, LEN, idInput) == 0){
-						//	puts("Modificacion exitosa!!!");
-						//}
-						//else{
-						//	puts("No se pudo modificar el empleado");
-						//}
 					}
 					else{
 						puts("No hay empleados para modificar");
@@ -120,7 +113,7 @@ int main(void) {
 					puts("***   BAJA EMPLEDO   ***");
 					if (thereIsAnyEmployee(employees, LEN)){
 						idInput = getID();
-						if (removeEmployee(employees, LEN, idInput) == 0){
+						if (removeEmployee(employees, LEN, idInput) == EXEC_OK){
 							puts("Baja exitosa!!!");
 						}
 						else{
@@ -133,7 +126,7 @@ int main(void) {
 					break;
 				case ReportEmployees:
 					if (thereIsAnyEmployee(employees, LEN)){
-						if (!printEmployees(employees, LEN)){
+						if (printEmployees(employees, LEN) != EXEC_OK){
 							puts("No se pudo mostrar los empleados");
 						}
 					}
