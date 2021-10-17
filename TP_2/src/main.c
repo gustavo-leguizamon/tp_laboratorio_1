@@ -48,24 +48,25 @@ int main(void) {
 					}
 					break;
 				case EditEmployee:
-					puts("***   MODIFICAR EMPLEDO   ***");
+					puts("***   MODIFICAR EMPLEDO   ***\n");
 					if (thereIsAnyEmployee(employees, LEN)){
 						idInput = getID();
 						employee = getEmployee(employees, LEN, idInput);
 						printHeaderEmployee();
 						if (employee == NULL){
-							printf("No existe empleado con ID: %d\n", idInput);
+							printf("No existe empleado con ID: %d\n\n", idInput);
 						}
 						else{
 							printEmployee(*employee);
 
 							keepEditing = 's';
 
+							puts("");
 							do{
 								switch(submenuEdit()){
 									case Name:
 										if (editName(employee, 51) == EXEC_OK){
-											puts("Modificacion exitosa!!!");
+											puts("Modificacion exitosa!!!\n");
 										}
 										else{
 											puts("No se pudo modificar el nombre del empleado");
@@ -73,7 +74,7 @@ int main(void) {
 										break;
 									case LastName:
 										if (editLastName(employee, 51) == EXEC_OK){
-											puts("Modificacion exitosa!!!");
+											puts("Modificacion exitosa!!!\n");
 										}
 										else{
 											puts("No se pudo modificar el apellido del empleado");
@@ -81,7 +82,7 @@ int main(void) {
 										break;
 									case Salary:
 										if (editSalary(employee) == EXEC_OK){
-											puts("Modificacion exitosa!!!");
+											puts("Modificacion exitosa!!!\n");
 										}
 										else{
 											puts("No se pudo modificar el salario del empleado");
@@ -89,7 +90,7 @@ int main(void) {
 										break;
 									case Sector:
 										if (editSector(employee) == EXEC_OK){
-											puts("Modificacion exitosa!!!");
+											puts("Modificacion exitosa!!!\n");
 										}
 										else{
 											puts("No se pudo modificar el sector del empleado");
@@ -110,18 +111,18 @@ int main(void) {
 					}
 					break;
 				case DeleteEmployee:
-					puts("***   BAJA EMPLEDO   ***");
+					puts("***   BAJA EMPLEDO   ***\n");
 					if (thereIsAnyEmployee(employees, LEN)){
 						idInput = getID();
 						if (removeEmployee(employees, LEN, idInput) == EXEC_OK){
-							puts("Baja exitosa!!!");
+							puts("Baja exitosa!!!\n");
 						}
 						else{
-							puts("No se pudo dar de baja el empleado");
+							puts("No se pudo dar de baja el empleado\n");
 						}
 					}
 					else{
-						puts("No hay empleados para dar de baja");
+						puts("No hay empleados para dar de baja\n");
 					}
 					break;
 				case ReportEmployees:

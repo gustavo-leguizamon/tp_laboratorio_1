@@ -168,6 +168,15 @@ int validateLastname(char lastname[]);
 
 
 /**
+ * @brief Transform first character of words to uppercase
+ *
+ * @param vector char[] Array of characters
+ * @return Returns (-1) if fails - (0) if ok
+ */
+int capitalize(char vector[]);
+
+
+/**
  * @brief Edit name of an employee
  *
  * @param employee Employee* Pointer to employee

@@ -70,23 +70,19 @@ int removeEmployee(Employee* list, int len, int id){
 	char confirmRemove;
 
 	if (list != NULL && len > 0){
-		puts("     *** BAJA EMPLEADO ***          ");
-
 		indexEmployee = findEmployeeById(list, len, id);
 		if (indexEmployee == -1){
 			printf("No existe empleado con id: %d\n", id);
 		}
 		else{
-			puts("    *** EMPLEADO ***     ");
-			puts("-----------------------------------");
-			puts("id     apellido    nombre   salario     sector");
-			puts("-----------------------------------");
+			puts("\n    *** EMPLEADO ***     ");
+			printHeaderEmployee();
 			printEmployee(*(list + indexEmployee));
-			getChar("Confirma BAJA? (s)i, (n)o", &confirmRemove);
+			getChar("\nConfirma BAJA? (s)i, (n)o: ", &confirmRemove);
 			confirmRemove = tolower(confirmRemove);
 			while (confirmRemove != 's' && confirmRemove != 'n'){
-				puts("Opcion no valida. Ingrese s para indicar SI o n para indicar NO");
-				getChar("Confirma BAJA? (s)i, (n)o", &confirmRemove);
+				puts("Opcion no valida. Ingrese s para indicar SI o n para indicar NO\n");
+				getChar("\nConfirma BAJA? (s)i, (n)o: ", &confirmRemove);
 				confirmRemove = tolower(confirmRemove);
 			}
 
@@ -178,12 +174,14 @@ int chargeDataEmployee(int* pId, char pName[], char pLastName[], float* pSalary,
 			puts("El nombre no es valido");
 			getString("Ingrese nombre: ", pName, 51);
 		}
+		capitalize(pName);
 
 		getString("Ingrese apellido: ", pLastName, 51);
 		while (!validateLastname(pLastName)){
 			puts("El apellido no es valido");
 			getString("Ingrese apellido: ", pLastName, 51);
 		}
+		capitalize(pLastName);
 
 		getFloat("Ingrese salario: ", pSalary);
 		while (!validateSalary(*pSalary)){
@@ -202,7 +200,7 @@ int chargeDataEmployee(int* pId, char pName[], char pLastName[], float* pSalary,
 
 void printHeaderEmployee(){
 	puts(" _________________________________________________________________________________________________________________________________");
-	puts("| ID    | Apellido                                 | Nombre                                   | Salario         | Sector          |");
+	puts("| ID    | APELLIDO                                 | NOMBRE                                   | SALARIO         | SECTOR          |");
 	puts("|_______|__________________________________________|__________________________________________|_________________|_________________|");
 }
 
@@ -245,7 +243,7 @@ int printEmployees(Employee* list, int length)
 		puts("    *** LISTA DE EMPLEADOS ***     ");
 		printHeaderEmployee();
 
-		sortEmployees(list, length, DOWN); //PEDIR POR CONSOLA EL ORDENAMIENTO
+		sortEmployees(list, length, UP); //PEDIR POR CONSOLA EL ORDENAMIENTO
 
 		for (int i = 0; i < length; i++){
 			if (!(list + i)->isEmpty){
@@ -257,9 +255,11 @@ int printEmployees(Employee* list, int length)
 		calcAverageSalary(list, length, &averageSalary);
 		numberEmployeesWhoExceedTheAverageSalary(list, length, &totalEmpleyeesWhoExceedTheAverageSalary);
 
+		puts("\n");
 		printf("El total de salarios es: $%.2f\n", totalSalary);
 		printf("El salario promedio es: $%.2f\n", averageSalary);
 		printf("La cantidad de empleados que superan el salario promedio es: %d\n", totalEmpleyeesWhoExceedTheAverageSalary);
+		puts("\n");
 
 		success  = EXEC_OK;
 	}
@@ -280,11 +280,11 @@ int validateSalary(float salary){
 
 
 int validateName(char name[]){
-	int valid = 0;
+	int valid = 1;
 	int index = 1;
 
 	if (name != NULL){
-		while (name[index] != '\0'){
+		while (name[index] != CHAR_NULL){
 			if (!isalpha(name[index])){
 				valid = 0;
 				break;
@@ -298,11 +298,11 @@ int validateName(char name[]){
 
 
 int validateLastname(char lastname[]){
-	int valid = 0;
+	int valid = 1;
 	int index = 1;
 
 	if (lastname != NULL){
-		while (lastname[index] != '\0'){
+		while (lastname[index] != CHAR_NULL){
 			if (!isalpha(lastname[index])){
 				valid = 0;
 				break;
@@ -312,6 +312,30 @@ int validateLastname(char lastname[]){
 	}
 
 	return valid;
+}
+
+
+int capitalize(char vector[]){
+	int success = -1;
+	int i;
+
+	if (vector != NULL){
+		if (strlen(vector) > 0){
+			strlwr(vector);
+			vector[0] = toupper(vector[0]);
+			i = 1;
+			while (vector[i] != CHAR_NULL){
+				if (vector[i] == ' '){
+					vector[i + 1] = toupper(vector[i + 1]);
+				}
+				i++;
+			}
+
+			success = EXEC_OK;
+		}
+	}
+
+	return success;
 }
 
 
@@ -325,6 +349,7 @@ int editName(Employee* employee, int len){
 			puts("El nombre no es valido");
 			getString("Ingrese el nuevo nombre: ", auxName, len);
 		}
+		capitalize(auxName);
 
 		strcpy(employee->name, auxName);
 		success = EXEC_OK;
@@ -344,6 +369,7 @@ int editLastName(Employee* employee, int len){
 			puts("El nombre no es valido");
 			getString("Ingrese el nuevo apellido: ", auxLastName, len);
 		}
+		capitalize(auxLastName);
 
 		strcpy(employee->lastName, auxLastName);
 		success = EXEC_OK;

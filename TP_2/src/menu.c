@@ -16,6 +16,7 @@ int menu(){
 	puts("5-Salir");
 	puts("\n");
 	getInt("Ingrese una opcion: ", &selectedOption);
+	puts("");
 
 	return selectedOption;
 }
@@ -32,6 +33,7 @@ int submenuEdit(){
 	puts("5-Cancelar");
 	puts("\n");
 	getInt("Ingrese una opcion: ", &selectedOption);
+	puts("");
 
 	return selectedOption;
 }
