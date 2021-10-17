@@ -27,7 +27,7 @@ int main(void) {
 	Employee* employee;
 
 	if (initEmployees(employees, LEN) == EXEC_OK){
-		hardCodeEmployees(employees, LEN, &nextId);
+		//hardCodeEmployees(employees, LEN, &nextId);
 
 		do{
 			//system("clear");

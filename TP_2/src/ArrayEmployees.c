@@ -285,7 +285,7 @@ int validateName(char name[]){
 
 	if (name != NULL){
 		while (name[index] != CHAR_NULL){
-			if (!isalpha(name[index])){
+			if (!isalpha(name[index]) || name[index] == ' '){
 				valid = 0;
 				break;
 			}
@@ -303,7 +303,7 @@ int validateLastname(char lastname[]){
 
 	if (lastname != NULL){
 		while (lastname[index] != CHAR_NULL){
-			if (!isalpha(lastname[index])){
+			if (!isalpha(lastname[index]) || lastname[index] == ' '){
 				valid = 0;
 				break;
 			}
