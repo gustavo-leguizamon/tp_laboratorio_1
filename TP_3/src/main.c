@@ -28,17 +28,24 @@ int main()
 
     int option;
 
-    LinkedList* listaEmpleados = ll_newLinkedList();
+    LinkedList* listEmployees = ll_newLinkedList();
 
     do{
     	option = menu();
         switch(option)
         {
             case optLoadEmployeesTextFile:
-                controller_loadFromText("data.csv", listaEmpleados);
+                controller_loadFromText("data.csv", listEmployees);
                 break;
+            case optExitMainMenu:
+            	break;
+            default:
+            	puts("Opcion invalida\n");
+            	break;
         }
     } while(option != optExitMainMenu);
+
+    puts("FIN DEL PROGRAMA");
 
     return EXIT_SUCCESS;
 }
