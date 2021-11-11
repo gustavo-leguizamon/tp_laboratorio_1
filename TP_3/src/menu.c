@@ -10,14 +10,14 @@ int menu(){
 
 	puts("**** ABM de Empleados ***");
 	printf("%d. Cargar los datos de los empleados desde el archivo data.csv (modo texto)\n", optLoadEmployeesTextFile);
-	//printf("%d. Cargar los datos de los empleados desde el archivo data.csv (modo binario)", optLoadEmployeesBinaryFile);
-	//printf("%d. Alta de empleado", optRegisterEmployee);
-	//printf("%d. Modificar datos de empleado", optEditEmployee);
-	//printf("%d. Baja de empleado", optDeleteEmployee);
-	//printf("%d. Listar empleados", optReportEmployees);
-	//printf("%d. Ordenar empleados", optSortEmployees);
-	//printf("%d. Guardar los datos de los empleados en el archivo data.csv (modo texto)", optSaveEmployeesTextFile);
-	//printf("%d. Guardar los datos de los empleados en el archivo data.csv (modo binario)", optSaveEmployeesBinaryFile);
+	//printf("%d. Cargar los datos de los empleados desde el archivo data.csv (modo binario)\n", optLoadEmployeesBinaryFile);
+	//printf("%d. Alta de empleado\n", optRegisterEmployee);
+	//printf("%d. Modificar datos de empleado\n", optEditEmployee);
+	//printf("%d. Baja de empleado\n", optDeleteEmployee);
+	printf("%d. Listar empleados\n", optReportEmployees);
+	//printf("%d. Ordenar empleados\n", optSortEmployees);
+	//printf("%d. Guardar los datos de los empleados en el archivo data.csv (modo texto)\n", optSaveEmployeesTextFile);
+	//printf("%d. Guardar los datos de los empleados en el archivo data.csv (modo binario)\n", optSaveEmployeesBinaryFile);
 	printf("%d. Salir\n", optExitMainMenu);
 	printf("\n");
 

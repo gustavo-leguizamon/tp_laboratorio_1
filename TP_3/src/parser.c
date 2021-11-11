@@ -29,6 +29,7 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 				auxEmployee = NULL;
 			}
 		} while(!feof(pFile));
+		success = 1;
 	}
 
     return success;

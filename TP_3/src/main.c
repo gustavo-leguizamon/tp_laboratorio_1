@@ -27,6 +27,7 @@ int main()
 	setbuf(stdout, NULL);
 
     int option;
+	int result;
 
     LinkedList* listEmployees = ll_newLinkedList();
 
@@ -35,8 +36,27 @@ int main()
         switch(option)
         {
             case optLoadEmployeesTextFile:
-                controller_loadFromText("data.csv", listEmployees);
+            	result = controller_loadFromText("data.csv", listEmployees);
+                if (result){
+                	puts("Se cargaron los datos desde el archivo");
+                }
+                else{
+                	puts("Ocurrio un error al cargar los datos del archivo");
+                }
+                puts("\n");
                 break;
+            case optReportEmployees:
+				result = controller_ListEmployee(listEmployees);
+            	if (result){
+                	if (result == 2){
+            			puts("NO hay empleados cargados en el sistema");
+                	}
+            	}
+            	else{
+            		puts("Ocurrio un error al mostrar empleados");
+            	}
+            	puts("\n");
+            	break;
             case optExitMainMenu:
             	break;
             default:

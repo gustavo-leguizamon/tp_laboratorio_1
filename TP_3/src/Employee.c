@@ -124,3 +124,21 @@ int employee_getSueldo(Employee* this, int* pSalary){
 	return success;
 }
 
+
+int showEmployee(Employee* pEmployee){
+	int success = 0;
+	int id;
+	char name[128];
+	int hoursWorked;
+	int salary;
+
+	if (pEmployee != NULL &&
+		employee_getId(pEmployee, &id) &&
+		employee_getNombre(pEmployee, name) &&
+		employee_getHorasTrabajadas(pEmployee, &hoursWorked) &&
+		employee_getSueldo(pEmployee, &salary)){
+		printf("| %4d | %20s | %5d | $%6d |\n", id, name, hoursWorked, salary);
+	}
+
+	return success;
+}

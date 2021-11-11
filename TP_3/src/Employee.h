@@ -24,4 +24,6 @@ int employee_getHorasTrabajadas(Employee* this, int* pHoursWorked);
 int employee_setSueldo(Employee* this, int salary);
 int employee_getSueldo(Employee* this, int* pSalary);
 
+int showEmployee(Employee* pEmployee);
+
 #endif // employee_H_INCLUDED
