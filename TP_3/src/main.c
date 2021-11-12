@@ -19,8 +19,6 @@
     10. Salir
 *****************************************************/
 
-#define NAME_FILE_TEXT "data.csv"
-#define NAME_FILE_BIN  "data.bin"
 
 int main()
 {
@@ -44,6 +42,15 @@ int main()
                 	puts("Ocurrio un error al cargar los datos del archivo");
                 }
                 break;
+            case optLoadEmployeesBinaryFile:
+            	result = controller_loadFromBinary(NAME_FILE_BIN, listEmployees);
+				if (result){
+					puts("Se cargaron los datos desde el archivo");
+				}
+				else{
+					puts("Ocurrio un error al cargar los datos del archivo");
+				}
+				break;
             case optReportEmployees:
             	if (!ll_isEmpty(listEmployees)){
     				result = controller_ListEmployee(listEmployees);

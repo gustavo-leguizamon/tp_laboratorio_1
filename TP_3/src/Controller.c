@@ -11,28 +11,37 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
 	int result = 0;
 
-	FILE* file = fopen(path, "r");
-	if (file != NULL){
-		if (parser_EmployeeFromText(file, pArrayListEmployee)){
-			result = 1;
-		}
+	if (path != NULL && pArrayListEmployee != NULL){
+		FILE* file = fopen(path, "r");
+		if (file != NULL){
+			if (parser_EmployeeFromText(file, pArrayListEmployee)){
+				result = 1;
+			}
 
-		fclose(file);
+			fclose(file);
+		}
 	}
 
     return result;
 }
 
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int result = 0;
+
+	if (path != NULL && pArrayListEmployee != NULL){
+		FILE* file = fopen(path, "rb");
+		if (file != NULL){
+			if (parser_EmployeeFromBinary(file, pArrayListEmployee) == 1){
+				result = 1;
+			}
+
+			fclose(file);
+		}
+	}
+
+    return result;
 }
 
 /** \brief Alta de empleados

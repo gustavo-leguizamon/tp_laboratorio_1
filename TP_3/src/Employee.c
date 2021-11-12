@@ -39,6 +39,18 @@ Employee* employee_newParametros(char* idStr, char* nameStr, char* hoursWorkedSt
 }
 
 
+int employee_delete(Employee* pEmployee){
+	int result = 0;
+
+	if (pEmployee != NULL){
+		free(pEmployee);
+		result = 1;
+	}
+
+	return result;
+}
+
+
 
 int employee_setId(Employee* this, int id){
 	int success = 0;

@@ -10,7 +10,7 @@ typedef struct
 
 Employee* employee_new();
 Employee* employee_newParametros(char* idStr, char* nameStr, char* hoursWorkedStr, char* salaryStr);
-void employee_delete();
+int employee_delete(Employee* pEmployee);
 
 int employee_setId(Employee* this, int id);
 int employee_getId(Employee* this, int* pId);

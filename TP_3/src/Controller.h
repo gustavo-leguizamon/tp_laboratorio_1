@@ -6,6 +6,15 @@
  * @return int 0: No se pudo cargar el archivo - 1: Ok
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee);
+
+
+/**
+ * @brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
+ *
+ * @param path char*
+ * @param pArrayListEmployee LinkedList*
+ * @return int 0: No se pudo cargar el archivo - 1: Ok
+ */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee);
 int controller_addEmployee(LinkedList* pArrayListEmployee);
 int controller_editEmployee(LinkedList* pArrayListEmployee);
