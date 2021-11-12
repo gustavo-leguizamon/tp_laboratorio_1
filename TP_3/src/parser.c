@@ -85,3 +85,32 @@ int parser_SaveEmployeeInText(FILE* pFile, LinkedList* pArrayListEmployee){
 
 	return result;
 }
+
+
+int parser_SaveEmployeeInBinary(FILE* pFile, LinkedList* pArrayListEmployee){
+	int result = 0;
+	Employee* auxEmployee;
+	int count;
+
+	if (pFile != NULL && pArrayListEmployee != NULL){
+		result = 1;
+
+		for (int i = 0; i < ll_len(pArrayListEmployee); i++){
+			auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
+			if (auxEmployee != NULL){
+				count = fwrite(auxEmployee, sizeof(Employee), 1, pFile);
+
+				if (count < 1){
+					result = 2;
+					break;
+				}
+			}
+			else{
+				result = 3;
+				break;
+			}
+		}
+	}
+
+	return result;
+}

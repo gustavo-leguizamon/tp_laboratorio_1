@@ -133,15 +133,29 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
     return result;
 }
 
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
- *
- */
-int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
+
+
+int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int result = 0;
+
+	if (path != NULL && pArrayListEmployee != NULL){
+		FILE* file = fopen(path, "wb");
+		if (file != NULL){
+			if (parser_SaveEmployeeInBinary(file, pArrayListEmployee) == 1){
+				result = 1;
+			}
+			else{
+				result = 3;
+			}
+
+			fclose(file);
+		}
+		else{
+			result = 2;
+		}
+	}
+
+	return result;
 }
 

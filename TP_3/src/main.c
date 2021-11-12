@@ -20,6 +20,7 @@
 *****************************************************/
 
 #define NAME_FILE_TEXT "data.csv"
+#define NAME_FILE_BIN  "data.bin"
 
 int main()
 {
@@ -72,6 +73,25 @@ int main()
             	else{
             		puts("No hay empleados para guardar en el archivo");
             	}
+            	break;
+            case optSaveEmployeesBinaryFile:
+            	if (!ll_isEmpty(listEmployees)){
+					result = controller_saveAsBinary(NAME_FILE_BIN, listEmployees);
+					if (result){
+						if (result == 1){
+							printf("Empleados guardados con exito en el archivo: %s\n", NAME_FILE_BIN);
+						}
+						else{
+							puts("Ocurrio un error al intentar guardar el archivo");
+						}
+					}
+					else{
+						puts("Ocurrio un error, datos no validos para guardar el archivo");
+					}
+				}
+				else{
+					puts("No hay empleados para guardar en el archivo");
+				}
             	break;
             case optExitMainMenu:
             	break;

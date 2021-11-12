@@ -30,6 +30,15 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee);
  * @return int 0: Error in parameters - 1: Ok - 2: Error to open file - 3: Error to save data
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee);
-int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
+
+
+/**
+ * @brief Guarda los datos de los empleados en el archivo data.bin (modo binario).
+ *
+ * @param path char*
+ * @param pArrayListEmployee LinkedList*
+ * @return int 0: Error in parameters - 1: Ok - 2: Error to open file - 3: Error to save data
+ */
+int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee);
 
 

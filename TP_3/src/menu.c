@@ -17,7 +17,7 @@ int menu(){
 	printf("%d. Listar empleados\n", optReportEmployees);
 	//printf("%d. Ordenar empleados\n", optSortEmployees);
 	printf("%d. Guardar los datos de los empleados en el archivo data.csv (modo texto)\n", optSaveEmployeesTextFile);
-	//printf("%d. Guardar los datos de los empleados en el archivo data.csv (modo binario)\n", optSaveEmployeesBinaryFile);
+	printf("%d. Guardar los datos de los empleados en el archivo data.bin (modo binario)\n", optSaveEmployeesBinaryFile);
 	printf("%d. Salir\n", optExitMainMenu);
 	printf("\n");
 
