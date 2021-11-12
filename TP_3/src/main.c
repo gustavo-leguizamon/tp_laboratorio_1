@@ -8,8 +8,7 @@
 
 /****************************************************
     Menu:
-     1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
-     2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).
+     1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).a
      3. Alta de empleado
      4. Modificar datos de empleado
      5. Baja de empleado
@@ -20,7 +19,7 @@
     10. Salir
 *****************************************************/
 
-
+#define NAME_FILE_TEXT "data.csv"
 
 int main()
 {
@@ -36,34 +35,54 @@ int main()
         switch(option)
         {
             case optLoadEmployeesTextFile:
-            	result = controller_loadFromText("data.csv", listEmployees);
+            	result = controller_loadFromText(NAME_FILE_TEXT, listEmployees);
                 if (result){
                 	puts("Se cargaron los datos desde el archivo");
                 }
                 else{
                 	puts("Ocurrio un error al cargar los datos del archivo");
                 }
-                puts("\n");
                 break;
             case optReportEmployees:
-				result = controller_ListEmployee(listEmployees);
-            	if (result){
-                	if (result == 2){
-            			puts("NO hay empleados cargados en el sistema");
+            	if (!ll_isEmpty(listEmployees)){
+    				result = controller_ListEmployee(listEmployees);
+                	if (!result){
+                		puts("Ocurrio un error al mostrar empleados");
                 	}
             	}
             	else{
-            		puts("Ocurrio un error al mostrar empleados");
+        			puts("NO hay empleados cargados en el sistema");
             	}
-            	puts("\n");
+            	break;
+            case optSaveEmployeesTextFile:
+            	if (!ll_isEmpty(listEmployees)){
+                	result = controller_saveAsText(NAME_FILE_TEXT, listEmployees);
+                	if (result){
+                		if (result == 1){
+                    		printf("Empleados guardados con exito en el archivo: %s\n", NAME_FILE_TEXT);
+                		}
+                		else{
+                    		puts("Ocurrio un error al intentar guardar el archivo");
+                		}
+                	}
+                	else{
+                		puts("Ocurrio un error, datos no validos para guardar el archivo");
+                	}
+            	}
+            	else{
+            		puts("No hay empleados para guardar en el archivo");
+            	}
             	break;
             case optExitMainMenu:
             	break;
             default:
-            	puts("Opcion invalida\n");
+            	puts("Opcion invalida");
             	break;
         }
+        puts("\n");
     } while(option != optExitMainMenu);
+
+    ll_deleteLinkedList(listEmployees);
 
     puts("FIN DEL PROGRAMA");
 

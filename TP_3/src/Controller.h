@@ -16,10 +16,19 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee);
  * @brief Listar empleados
  *
  * @param pArrayListEmployee LinkedList*
- * @return int
+ * @return int 0: Error in parameters - 1: Ok
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee);
 int controller_sortEmployee(LinkedList* pArrayListEmployee);
+
+
+/**
+ * @brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
+ *
+ * @param path char*
+ * @param pArrayListEmployee LinkedList*
+ * @return int 0: Error in parameters - 1: Ok - 2: Error to open file - 3: Error to save data
+ */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee);
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
 

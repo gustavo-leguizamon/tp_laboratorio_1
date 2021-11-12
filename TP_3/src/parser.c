@@ -47,3 +47,41 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 
     return 1;
 }
+
+
+int parser_SaveEmployeeInText(FILE* pFile, LinkedList* pArrayListEmployee){
+	int result = 0;
+	Employee* auxEmployee;
+	int count;
+	int id;
+	char name[128];
+	int hoursWorked;
+	int salary;
+
+	if (pFile != NULL && pArrayListEmployee != NULL){
+		result = 1;
+		fprintf(pFile, "id,nombre,horasTrabajadas,sueldo\n"); //PRINT HEADER
+
+		for (int i = 0; i < ll_len(pArrayListEmployee); i++){
+			auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
+			if (auxEmployee != NULL &&
+				employee_getId(auxEmployee, &id) &&
+				employee_getNombre(auxEmployee, name) &&
+				employee_getHorasTrabajadas(auxEmployee, &hoursWorked) &&
+				employee_getSueldo(auxEmployee, &salary)){
+				count = fprintf(pFile, "%d,%s,%d,%d\n", id, name, hoursWorked, salary);
+
+				if (count < 4){
+					result = 2;
+					break;
+				}
+			}
+			else{
+				result = 3;
+				break;
+			}
+		}
+	}
+
+	return result;
+}

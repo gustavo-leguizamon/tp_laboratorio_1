@@ -9,18 +9,18 @@
 
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
-	int success = 0;
+	int result = 0;
 
 	FILE* file = fopen(path, "r");
 	if (file != NULL){
 		if (parser_EmployeeFromText(file, pArrayListEmployee)){
-			success = 1;
+			result = 1;
 		}
 
 		fclose(file);
 	}
 
-    return success;
+    return result;
 }
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
@@ -75,7 +75,6 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
 	int success = 0;
-	int listEmpty = 1;
 	Employee* auxEmployee = NULL;
 	/*
 	int lenColumns = 4;
@@ -91,11 +90,6 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 			auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
 			showEmployee(auxEmployee);
 			//printFooter(lengths, lenColumns);
-			listEmpty = 0;
-		}
-
-		if (listEmpty){
-			success = 2;
 		}
 	}
 
@@ -114,16 +108,29 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
     return 1;
 }
 
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
- *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
- *
- */
-int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
+
+int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int result = 0;
+
+	if (path != NULL && pArrayListEmployee != NULL){
+		FILE* file = fopen(path, "w");
+		if (file != NULL){
+			if (parser_SaveEmployeeInText(file, pArrayListEmployee) == 1){
+				result = 1;
+			}
+			else{
+				result = 3;
+			}
+
+			fclose(file);
+		}
+		else{
+			result = 2;
+		}
+	}
+
+    return result;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
