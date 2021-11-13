@@ -47,7 +47,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 }
 
 
-int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId)
+int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId, char* pathIdFile)
 {
     int result = 0;
 	char name[128];
@@ -55,13 +55,14 @@ int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId)
 	float salary;
 	Employee* auxEmployee;
 
-    if (pArrayListEmployee != NULL && pNextId != NULL){
+    if (pArrayListEmployee != NULL && pNextId != NULL && pathIdFile != NULL){
 		puts("     *** ALTA EMPLEADO ***          ");
     	if (employee_chargeData(name, &hoursWorked, &salary)){
     		auxEmployee = employee_newParametros(*pNextId, name, hoursWorked, salary);
     		if (auxEmployee != NULL){
     			ll_add(pArrayListEmployee, auxEmployee);
     			*pNextId += 1;
+    			employee_saveLastId(pathIdFile, *pNextId);
     			result = 1;
     		}
     		else{

@@ -237,6 +237,26 @@ int employee_compareByName(void* pEmployeeA, void* pEmployeeB);
 
 
 /**
+ * @brief Save last ID used in a single file
+ *
+ * @param pathIdFile char*
+ * @param id int
+ * @return int 0: Error in parameters - 1: Ok - 2: Error to save data in file
+ */
+int employee_saveLastId(char* pathIdFile, int id);
+
+
+/**
+ * @brief Restore last id saved to use it
+ *
+ * @param pathIdFile char*
+ * @param pId int*
+ * @return int 0: Error in parameters - 1: Ok - 2: Error to read data from file
+ */
+int employee_restoreLastId(char* pathIdFile, int* pId);
+
+
+/**
  * @brief Validate if exists an employee with id
  *
  * @param pArrayLinkedList LinkedList*

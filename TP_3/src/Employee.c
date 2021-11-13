@@ -162,7 +162,7 @@ int employee_getSueldo(Employee* this, float* pSalary){
 
 
 void employee_printHeaderReport(){
-	printf("| %4s | %20s | %4s | %9s |\n", "ID", "NOMBRE", "HORAS", "SALARIO");
+	printf("| %4s | %-20s | %4s | %9s |\n", "ID", "NOMBRE", "HORAS", "SALARIO");
 }
 
 int employee_showEmployee(Employee* pEmployee){
@@ -368,6 +368,50 @@ int employee_compareByName(void* pEmployeeA, void* pEmployeeB){
 }
 
 
+int employee_saveLastId(char* pathIdFile, int id){
+	int result = 0;
+	int count;
+
+	if (pathIdFile != NULL && id > 0){
+		FILE* file = fopen(pathIdFile, "wb");
+		if (file != NULL){
+			result = 1;
+			count = fwrite(&id, sizeof(int), 1, file);
+			if (count < 1){
+				result = 2;
+			}
+
+			fclose(file);
+		}
+	}
+
+	return result;
+}
+
+
+int employee_restoreLastId(char* pathIdFile, int* pId){
+	int result = 0;
+	int count;
+
+	if (pathIdFile != NULL && pId != NULL){
+		FILE* file = fopen(pathIdFile, "rb");
+		if (file != NULL){
+			result = 1;
+			count = fread(pId, sizeof(int), 1, file);
+			if (count < 1){
+				result = 2;
+			}
+
+			fclose(file);
+		}
+		else{
+			*pId = 1;
+			result = 1;
+		}
+	}
+
+    return result;
+}
 
 
 

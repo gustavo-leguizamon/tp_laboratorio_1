@@ -20,6 +20,7 @@
     10. Salir
 *****************************************************/
 
+#define PATH_FILE_LAST_ID "last_id.bin"
 
 int main()
 {
@@ -34,6 +35,8 @@ int main()
     	puts("No se pudo iniciar la lista");
     	exit(EXIT_FAILURE);
     }
+
+    employee_restoreLastId(PATH_FILE_LAST_ID, &nextId);
 
     do{
     	option = menu();
@@ -58,7 +61,7 @@ int main()
 				}
 				break;
             case optMainRegisterEmployee:
-            	result = controller_addEmployee(listEmployees, &nextId);
+            	result = controller_addEmployee(listEmployees, &nextId, PATH_FILE_LAST_ID);
             	if (result == 1){
             		puts("Alta exitosa");
             	}
