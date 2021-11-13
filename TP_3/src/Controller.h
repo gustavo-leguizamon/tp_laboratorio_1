@@ -3,7 +3,7 @@
  *
  * @param path char*
  * @param pArrayListEmployee LinkedList*
- * @return int 0: No se pudo cargar el archivo - 1: Ok
+ * @return int 0: No se pudo cargar el archivo - 1: Ok - 2: Load cancelled by user
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee);
 
@@ -13,7 +13,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee);
  *
  * @param path char*
  * @param pArrayListEmployee LinkedList*
- * @return int 0: No se pudo cargar el archivo - 1: Ok
+ * @return int 0: No se pudo cargar el archivo - 1: Ok - 2: Load cancelled by user
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee);
 

@@ -12,12 +12,26 @@
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
 	int result = 0;
+	char confirmDeleteData = 's';
 
 	if (path != NULL && pArrayListEmployee != NULL){
 		FILE* file = fopen(path, "r");
 		if (file != NULL){
-			if (parser_EmployeeFromText(file, pArrayListEmployee)){
-				result = 1;
+			if (!ll_isEmpty(pArrayListEmployee)){
+				getChar("Hay datos cargados, si continua se sobreescribiran. Confirma sobreescritura de datos actuales? n(NO) - s(SI): ", &confirmDeleteData);
+				while (confirmDeleteData != 'n' && confirmDeleteData != 's'){
+					getChar("Escriba n o s. Confirma sobreescritura de datos actuales? n(NO) - s(SI): ", &confirmDeleteData);
+				}
+			}
+
+			if (confirmDeleteData == 's'){
+				ll_clear(pArrayListEmployee);
+				if (parser_EmployeeFromText(file, pArrayListEmployee)){
+					result = 1;
+				}
+			}
+			else{
+				result = 2;
 			}
 
 			fclose(file);
@@ -31,12 +45,26 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
 	int result = 0;
+	char confirmDeleteData = 's';
 
 	if (path != NULL && pArrayListEmployee != NULL){
 		FILE* file = fopen(path, "rb");
 		if (file != NULL){
-			if (parser_EmployeeFromBinary(file, pArrayListEmployee) == 1){
-				result = 1;
+			if (!ll_isEmpty(pArrayListEmployee)){
+				getChar("Hay datos cargados, si continua se sobreescribiran. Confirma sobreescritura de datos actuales? n(NO) - s(SI): ", &confirmDeleteData);
+				while (confirmDeleteData != 'n' && confirmDeleteData != 's'){
+					getChar("Escriba n o s. Confirma sobreescritura de datos actuales? n(NO) - s(SI): ", &confirmDeleteData);
+				}
+			}
+
+			if (confirmDeleteData == 's'){
+				ll_clear(pArrayListEmployee);
+				if (parser_EmployeeFromBinary(file, pArrayListEmployee) == 1){
+					result = 1;
+				}
+			}
+			else{
+				result = 2;
 			}
 
 			fclose(file);
@@ -87,7 +115,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     int indexEmployee = -1;
 
     if (pArrayListEmployee != NULL){
-    	controller_ListEmployee(pArrayListEmployee);
+    	employee_showEmployees(pArrayListEmployee);
 
     	getInt("Ingrese ID de empleado: ", &idEmployee);
 
@@ -155,7 +183,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
     char confirm = 'n';
 
     if (pArrayListEmployee != NULL){
-    	controller_ListEmployee(pArrayListEmployee);
+    	employee_showEmployees(pArrayListEmployee);
 
     	getInt("Ingrese ID de empleado: ", &idEmployee);
 
@@ -193,22 +221,10 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
 	int result = 0;
-	Employee* auxEmployee = NULL;
-	/*
-	int lenColumns = 4;
-	char columns[4][128] = { "ID", "NOMBRE", "HORAS TRABAJADAS", "SALARIO" };
-	int lengths[4] = { 6, 130, 18, 9 };
-	*/
 
 	if (pArrayListEmployee != NULL){
+		employee_showEmployees(pArrayListEmployee);
 		result = 1;
-		//printHeader(columns, lengths, lenColumns);
-		employee_printHeaderReport();
-		for (int i = 0; i < ll_len(pArrayListEmployee); i++){
-			auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
-			employee_showEmployee(auxEmployee);
-			//printFooter(lengths, lenColumns);
-		}
 	}
 
     return result;

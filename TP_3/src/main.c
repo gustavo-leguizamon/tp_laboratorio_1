@@ -44,8 +44,11 @@ int main()
         {
             case optMainLoadEmployeesTextFile:
             	result = controller_loadFromText(NAME_FILE_TEXT, listEmployees);
-                if (result){
+                if (result == 1){
                 	puts("Se cargaron los datos desde el archivo");
+                }
+                else if (result == 2){
+                	puts("Carga de datos cancelada por el usuario");
                 }
                 else{
                 	puts("Ocurrio un error al cargar los datos del archivo");
@@ -53,9 +56,12 @@ int main()
                 break;
             case optMainLoadEmployeesBinaryFile:
             	result = controller_loadFromBinary(NAME_FILE_BIN, listEmployees);
-				if (result){
+				if (result == 1){
 					puts("Se cargaron los datos desde el archivo");
 				}
+                else if (result == 2){
+                	puts("Carga de datos cancelada por el usuario");
+                }
 				else{
 					puts("Ocurrio un error al cargar los datos del archivo");
 				}

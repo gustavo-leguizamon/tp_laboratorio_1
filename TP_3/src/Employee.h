@@ -140,12 +140,21 @@ void employee_printHeaderReport();
 
 
 /**
- * @brief Print in console the values of fields
+ * @brief Print in console all values from fields in employee
  *
  * @param pEmployee Employee*
  * @return int 0: Error in parameters - 1: Ok
  */
 int employee_showEmployee(Employee* pEmployee);
+
+
+/**
+ * @brief Print in console all employees
+ *
+ * @param pArrayLinkedList LinkedList*
+ * @return int 0: Error in parameters - 1: Ok
+ */
+int employee_showEmployees(LinkedList* pArrayLinkedList);
 
 
 /**

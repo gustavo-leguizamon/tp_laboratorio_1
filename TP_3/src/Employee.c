@@ -183,6 +183,31 @@ int employee_showEmployee(Employee* pEmployee){
 	return result;
 }
 
+
+int employee_showEmployees(LinkedList* pArrayLinkedList){
+	int result = 0;
+	Employee* auxEmployee = NULL;
+	/*
+	int lenColumns = 4;
+	char columns[4][128] = { "ID", "NOMBRE", "HORAS TRABAJADAS", "SALARIO" };
+	int lengths[4] = { 6, 130, 18, 9 };
+	*/
+
+	if (pArrayLinkedList != NULL){
+		//printHeader(columns, lengths, lenColumns);
+		employee_printHeaderReport();
+		for (int i = 0; i < ll_len(pArrayLinkedList); i++){
+			auxEmployee = (Employee*)ll_get(pArrayLinkedList, i);
+			employee_showEmployee(auxEmployee);
+			//printFooter(lengths, lenColumns);
+		}
+		result = 1;
+	}
+
+    return result;
+}
+
+
 int employee_findHighestId(LinkedList* pArrayLinkedList, int* pId){
 	int result = 0;
 	int highestId = 0;
