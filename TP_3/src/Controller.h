@@ -25,7 +25,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee);
  * @param pArrayListEmployee LinkedList*
  * @param pId int*
  * @param pathIdFile char*
- * @return int 0: Error in parameters - 1: Ok - 2: Error in data from user - 3: Error to build employee
+ * @return int 0: Error in parameters - 1: Ok - 2: Error in data from user - 3: Error to build employee - 4: Error to add employee in LinkedList
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId, char* pathIdFile);
 

@@ -29,6 +29,7 @@ int main()
     int option;
 	int result;
 	int nextId = 1;
+	//int auxNextId;
 
     LinkedList* listEmployees = ll_newLinkedList();
     if (listEmployees == NULL){
@@ -36,7 +37,7 @@ int main()
     	exit(EXIT_FAILURE);
     }
 
-    employee_restoreLastId(PATH_FILE_LAST_ID, &nextId);
+    //employee_restoreLastId(PATH_FILE_LAST_ID, &nextId);
 
     do{
     	option = menu();
@@ -45,6 +46,7 @@ int main()
             case optMainLoadEmployeesTextFile:
             	result = controller_loadFromText(NAME_FILE_TEXT, listEmployees);
                 if (result == 1){
+                	employee_findHighestId(listEmployees, &nextId);
                 	puts("Se cargaron los datos desde el archivo");
                 }
                 else if (result == 2){
@@ -57,6 +59,7 @@ int main()
             case optMainLoadEmployeesBinaryFile:
             	result = controller_loadFromBinary(NAME_FILE_BIN, listEmployees);
 				if (result == 1){
+                	employee_findHighestId(listEmployees, &nextId);
 					puts("Se cargaron los datos desde el archivo");
 				}
                 else if (result == 2){

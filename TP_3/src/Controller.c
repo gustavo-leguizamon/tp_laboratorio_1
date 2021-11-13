@@ -17,6 +17,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 	if (path != NULL && pArrayListEmployee != NULL){
 		FILE* file = fopen(path, "r");
 		if (file != NULL){
+			//CONFIRM OVERRIDE DATA IF EXISTS
 			if (!ll_isEmpty(pArrayListEmployee)){
 				getChar("Hay datos cargados, si continua se sobreescribiran. Confirma sobreescritura de datos actuales? n(NO) - s(SI): ", &confirmDeleteData);
 				while (confirmDeleteData != 'n' && confirmDeleteData != 's'){
@@ -88,10 +89,14 @@ int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId, char* p
     	if (employee_chargeData(name, &hoursWorked, &salary)){
     		auxEmployee = employee_newParametros(*pNextId, name, hoursWorked, salary);
     		if (auxEmployee != NULL){
-    			ll_add(pArrayListEmployee, auxEmployee);
-    			*pNextId += 1;
-    			employee_saveLastId(pathIdFile, *pNextId);
-    			result = 1;
+    			if (ll_add(pArrayListEmployee, auxEmployee)){
+        			*pNextId += 1;
+        			//employee_saveLastId(pathIdFile, *pNextId);
+        			result = 1;
+    			}
+    			else{
+    				result = 4;
+    			}
     		}
     		else{
     			result = 3;

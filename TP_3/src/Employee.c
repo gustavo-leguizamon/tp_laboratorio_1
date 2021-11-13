@@ -210,13 +210,13 @@ int employee_showEmployees(LinkedList* pArrayLinkedList){
 
 int employee_findHighestId(LinkedList* pArrayLinkedList, int* pId){
 	int result = 0;
-	int highestId = 0;
+	int highestId;
 	Employee* auxEmployee = NULL;
 
 	if (pArrayLinkedList != NULL && pId != NULL){
 		for (int i = 0; i < ll_len(pArrayLinkedList); i++){
 			auxEmployee = ll_get(pArrayLinkedList, i);
-			if (auxEmployee->id > highestId){
+			if (i == 0 || auxEmployee->id > highestId){
 				highestId = auxEmployee->id;
 			}
 		}
@@ -424,6 +424,7 @@ int employee_restoreLastId(char* pathIdFile, int* pId){
 			result = 1;
 			count = fread(pId, sizeof(int), 1, file);
 			if (count < 1){
+				*pId = 1;
 				result = 2;
 			}
 
