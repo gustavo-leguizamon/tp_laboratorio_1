@@ -39,7 +39,7 @@ int main()
     	option = menu();
         switch(option)
         {
-            case optLoadEmployeesTextFile:
+            case optMainLoadEmployeesTextFile:
             	result = controller_loadFromText(NAME_FILE_TEXT, listEmployees);
                 if (result){
                 	puts("Se cargaron los datos desde el archivo");
@@ -48,7 +48,7 @@ int main()
                 	puts("Ocurrio un error al cargar los datos del archivo");
                 }
                 break;
-            case optLoadEmployeesBinaryFile:
+            case optMainLoadEmployeesBinaryFile:
             	result = controller_loadFromBinary(NAME_FILE_BIN, listEmployees);
 				if (result){
 					puts("Se cargaron los datos desde el archivo");
@@ -57,7 +57,7 @@ int main()
 					puts("Ocurrio un error al cargar los datos del archivo");
 				}
 				break;
-            case optRegisterEmployee:
+            case optMainRegisterEmployee:
             	result = controller_addEmployee(listEmployees, &nextId);
             	if (result == 1){
             		puts("Alta exitosa");
@@ -66,7 +66,7 @@ int main()
             		puts("No se pudo dar de alta el empleado");
             	}
             	break;
-            case optEditEmployee:
+            case optMainEditEmployee:
             	if (ll_isEmpty(listEmployees)){
         			puts("NO hay empleados cargados en el sistema");
             	}
@@ -80,7 +80,7 @@ int main()
 					}
             	}
             	break;
-            case optDeleteEmployee:
+            case optMainDeleteEmployee:
             	if (ll_isEmpty(listEmployees)){
         			puts("NO hay empleados cargados en el sistema");
             	}
@@ -97,7 +97,7 @@ int main()
 					}
             	}
             	break;
-            case optReportEmployees:
+            case optMainReportEmployees:
             	if (ll_isEmpty(listEmployees)){
         			puts("NO hay empleados cargados en el sistema");
             	}
@@ -108,7 +108,7 @@ int main()
 					}
             	}
             	break;
-            case optSortEmployees:
+            case optMainSortEmployees:
             	if (ll_isEmpty(listEmployees)){
 					puts("NO hay empleados cargados en el sistema");
 				}
@@ -122,7 +122,7 @@ int main()
 					}
 				}
             	break;
-            case optSaveEmployeesTextFile:
+            case optMainSaveEmployeesTextFile:
             	if (!ll_isEmpty(listEmployees)){
                 	result = controller_saveAsText(NAME_FILE_TEXT, listEmployees);
                 	if (result){
@@ -141,7 +141,7 @@ int main()
             		puts("No hay empleados para guardar en el archivo");
             	}
             	break;
-            case optSaveEmployeesBinaryFile:
+            case optMainSaveEmployeesBinaryFile:
             	if (!ll_isEmpty(listEmployees)){
 					result = controller_saveAsBinary(NAME_FILE_BIN, listEmployees);
 					if (result){
@@ -160,14 +160,14 @@ int main()
 					puts("No hay empleados para guardar en el archivo");
 				}
             	break;
-            case optExitMainMenu:
+            case optMainExitMenu:
             	break;
             default:
             	puts("Opcion invalida");
             	break;
         }
         puts("\n");
-    } while(option != optExitMainMenu);
+    } while(option != optMainExitMenu);
 
     ll_deleteLinkedList(listEmployees);
 

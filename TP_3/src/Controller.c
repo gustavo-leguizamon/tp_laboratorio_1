@@ -57,7 +57,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId)
 
     if (pArrayListEmployee != NULL && pNextId != NULL){
 		puts("     *** ALTA EMPLEADO ***          ");
-    	if (chargeDataEmployee(name, &hoursWorked, &salary)){
+    	if (employee_chargeData(name, &hoursWorked, &salary)){
     		auxEmployee = employee_newParametros(*pNextId, name, hoursWorked, salary);
     		if (auxEmployee != NULL){
     			ll_add(pArrayListEmployee, auxEmployee);
@@ -99,8 +99,8 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
     	auxEmployee = (Employee*)ll_get(pArrayListEmployee, indexEmployee);
 
-		printHeaderEmployee();
-		showEmployee(auxEmployee);
+		employee_printHeaderReport();
+		employee_showEmployee(auxEmployee);
     	//do{
     		option = submenuEdit();
 			switch(option){
@@ -168,8 +168,8 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
     	auxEmployee = (Employee*)ll_get(pArrayListEmployee, indexEmployee);
 
     	puts("\nEMPLEADO:");
-		printHeaderEmployee();
-		showEmployee(auxEmployee);
+		employee_printHeaderReport();
+		employee_showEmployee(auxEmployee);
 
 		getChar("Confirma eliminacion del empleado? n(NO) - s(SI): ", &confirm);
 		while (confirm != 'n' && confirm != 's'){
@@ -202,10 +202,10 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 	if (pArrayListEmployee != NULL){
 		result = 1;
 		//printHeader(columns, lengths, lenColumns);
-		printHeaderEmployee();
+		employee_printHeaderReport();
 		for (int i = 0; i < ll_len(pArrayListEmployee); i++){
 			auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
-			showEmployee(auxEmployee);
+			employee_showEmployee(auxEmployee);
 			//printFooter(lengths, lenColumns);
 		}
 	}
@@ -222,7 +222,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
     	//ll_sort(LinkedList* this, int(*)(void*,void*) pFunc, int order)
 
     	puts("Ordenando los empleados por nombre...Por favor espere");
-    	ll_sort(pArrayListEmployee, employee_orderByName, 1);
+    	ll_sort(pArrayListEmployee, employee_compareByName, 1);
     	result = 1;
     }
 

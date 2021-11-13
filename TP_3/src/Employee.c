@@ -161,11 +161,11 @@ int employee_getSueldo(Employee* this, float* pSalary){
 }
 
 
-void printHeaderEmployee(){
+void employee_printHeaderReport(){
 	printf("| %4s | %20s | %4s | %9s |\n", "ID", "NOMBRE", "HORAS", "SALARIO");
 }
 
-int showEmployee(Employee* pEmployee){
+int employee_showEmployee(Employee* pEmployee){
 	int result = 0;
 	int id;
 	char name[128];
@@ -183,7 +183,7 @@ int showEmployee(Employee* pEmployee){
 	return result;
 }
 
-int findHighestId(LinkedList* pArrayLinkedList, int* pId){
+int employee_findHighestId(LinkedList* pArrayLinkedList, int* pId){
 	int result = 0;
 	int highestId = 0;
 	Employee* auxEmployee = NULL;
@@ -203,7 +203,7 @@ int findHighestId(LinkedList* pArrayLinkedList, int* pId){
 	return result;
 }
 
-int chargeDataEmployee(char* pName, int* pHoursWorked, float* pSalary){
+int employee_chargeData(char* pName, int* pHoursWorked, float* pSalary){
 	int result = 0;
 
 	if (pName != NULL && pHoursWorked != NULL && pSalary != NULL){
@@ -235,19 +235,19 @@ int chargeDataEmployee(char* pName, int* pHoursWorked, float* pSalary){
 		*/
 		//chargeSalary(pSalary);
 
-		result = chargeName(pName, 128) && chargeHoursWorked(pHoursWorked) && chargeSalary(pSalary);
+		result = employee_chargeName(pName, 128) && employee_chargeHoursWorked(pHoursWorked) && employee_chargeSalary(pSalary);
 	}
 
 	return result;
 }
 
 
-int chargeName(char* pName, int len){
+int employee_chargeName(char* pName, int len){
 	int result = 0;
 
 	if (pName != NULL && len > 0){
 		getString("Ingrese nombre: ", pName, len);
-		while (!validateName(pName)){
+		while (!employee_validateInputName(pName)){
 			puts("El nombre no es valido");
 			getString("Ingrese nombre: ", pName, len);
 		}
@@ -259,12 +259,12 @@ int chargeName(char* pName, int len){
 }
 
 
-int chargeHoursWorked(int* pHoursWorked){
+int employee_chargeHoursWorked(int* pHoursWorked){
 	int result = 0;
 
 	if (pHoursWorked != NULL){
 		getInt("Ingrese horas trabajadas: ", pHoursWorked);
-		while (!validateHoursWorked(*pHoursWorked)){
+		while (!employee_validateInputHoursWorked(*pHoursWorked)){
 			puts("Las horas ingresadas no son validas");
 			getInt("Ingrese horas trabajadas: ", pHoursWorked);
 		}
@@ -275,12 +275,12 @@ int chargeHoursWorked(int* pHoursWorked){
 }
 
 
-int chargeSalary(float* pSalary){
+int employee_chargeSalary(float* pSalary){
 	int result = 0;
 
 	if (pSalary != NULL){
 		getFloat("Ingrese salario: ", pSalary);
-		while (!validateSalary(*pSalary)){
+		while (!employee_validateInputSalary(*pSalary)){
 			puts("El salario ingresado no es valido");
 			getFloat("Ingrese salario: ", pSalary);
 		}
@@ -297,7 +297,7 @@ int employee_editName(Employee* pEmployee, int len){
 
 	if (pEmployee != NULL){
 		result = 1;
-		if (chargeName(name, len)){
+		if (employee_chargeName(name, len)){
 			if (!employee_setNombre(pEmployee, name)){
 				result = 3;
 			}
@@ -317,7 +317,7 @@ int employee_editHoursWorked(Employee* pEmployee){
 
 	if (pEmployee != NULL){
 		result = 1;
-		if (chargeHoursWorked(&hoursWorked)){
+		if (employee_chargeHoursWorked(&hoursWorked)){
 			if (!employee_setHorasTrabajadas(pEmployee, hoursWorked)){
 				result = 3;
 			}
@@ -337,7 +337,7 @@ int employee_editSalary(Employee* pEmployee){
 
 	if (pEmployee != NULL){
 		result = 1;
-		if (chargeSalary(&salary)){
+		if (employee_chargeSalary(&salary)){
 			if (!employee_setSueldo(pEmployee, salary)){
 				result = 3;
 			}
@@ -352,7 +352,7 @@ int employee_editSalary(Employee* pEmployee){
 
 
 
-int employee_orderByName(void* pEmployeeA, void* pEmployeeB){
+int employee_compareByName(void* pEmployeeA, void* pEmployeeB){
 	int result = -2;
 	Employee* auxEmployeeA = NULL;
 	Employee* auxEmployeeB = NULL;
@@ -388,7 +388,7 @@ int employee_validateId(LinkedList* pArrayLinkedList, int id){
 	return index;
 }
 
-int validateName(char* name){
+int employee_validateInputName(char* name){
 	int valid = 1;
 	int index = 1;
 
@@ -405,10 +405,10 @@ int validateName(char* name){
 	return valid;
 }
 
-int validateSalary(float salary){
+int employee_validateInputSalary(float salary){
 	return salary > 0;
 }
 
-int validateHoursWorked(int hours){
+int employee_validateInputHoursWorked(int hours){
 	return hours > 0;
 }

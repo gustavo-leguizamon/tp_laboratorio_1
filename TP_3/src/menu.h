@@ -2,16 +2,16 @@
 #define SRC_MENU_H_
 
 enum enumMainMenu {
-	optLoadEmployeesTextFile = 1,
-	optLoadEmployeesBinaryFile,
-	optRegisterEmployee,
-	optEditEmployee,
-	optDeleteEmployee,
-	optReportEmployees,
-	optSortEmployees,
-	optSaveEmployeesTextFile,
-	optSaveEmployeesBinaryFile,
-	optExitMainMenu
+	optMainLoadEmployeesTextFile = 1,
+	optMainLoadEmployeesBinaryFile,
+	optMainRegisterEmployee,
+	optMainEditEmployee,
+	optMainDeleteEmployee,
+	optMainReportEmployees,
+	optMainSortEmployees,
+	optMainSaveEmployeesTextFile,
+	optMainSaveEmployeesBinaryFile,
+	optMainExitMenu
 };
 
 
