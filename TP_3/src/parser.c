@@ -79,7 +79,7 @@ int parser_SaveEmployeeInText(FILE* pFile, LinkedList* pArrayListEmployee){
 	int id;
 	char name[128];
 	int hoursWorked;
-	int salary;
+	float salary;
 
 	if (pFile != NULL && pArrayListEmployee != NULL){
 		result = 1;
@@ -92,7 +92,7 @@ int parser_SaveEmployeeInText(FILE* pFile, LinkedList* pArrayListEmployee){
 				employee_getNombre(auxEmployee, name) &&
 				employee_getHorasTrabajadas(auxEmployee, &hoursWorked) &&
 				employee_getSueldo(auxEmployee, &salary)){
-				count = fprintf(pFile, "%d,%s,%d,%d\n", id, name, hoursWorked, salary);
+				count = fprintf(pFile, "%d,%s,%d,%f\n", id, name, hoursWorked, salary);
 
 				if (count < 4){
 					result = 2;

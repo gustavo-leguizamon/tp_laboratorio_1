@@ -66,15 +66,29 @@ int main()
             		puts("No se pudo dar de alta el empleado");
             	}
             	break;
-            case optReportEmployees:
-            	if (!ll_isEmpty(listEmployees)){
-    				result = controller_ListEmployee(listEmployees);
-                	if (!result){
-                		puts("Ocurrio un error al mostrar empleados");
-                	}
+            case optEditEmployee:
+            	if (ll_isEmpty(listEmployees)){
+        			puts("NO hay empleados cargados en el sistema");
             	}
             	else{
+            		result = controller_editEmployee(listEmployees);
+					if (result){
+						puts("Exito al modificar los datos del empleado");
+					}
+					else{
+						puts("Ocurrio un error al modificar el empleado");
+					}
+            	}
+            	break;
+            case optReportEmployees:
+            	if (ll_isEmpty(listEmployees)){
         			puts("NO hay empleados cargados en el sistema");
+            	}
+            	else{
+            		result = controller_ListEmployee(listEmployees);
+					if (!result){
+						puts("Ocurrio un error al mostrar empleados");
+					}
             	}
             	break;
             case optSaveEmployeesTextFile:

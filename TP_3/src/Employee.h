@@ -28,9 +28,12 @@ int employee_getHorasTrabajadas(Employee* this, int* pHoursWorked);
 int employee_setSueldo(Employee* this, float salary);
 int employee_getSueldo(Employee* this, float* pSalary);
 
+void printHeaderEmployee();
+
 int showEmployee(Employee* pEmployee);
 
 int findHighestId(LinkedList* pArrayLinkedList, int* pId);
+
 
 
 /**
@@ -43,7 +46,70 @@ int findHighestId(LinkedList* pArrayLinkedList, int* pId);
  */
 int chargeDataEmployee(char* pName, int* pHoursWorked, float* pSalary);
 
+/**
+ * @brief Charge name for employee
+ *
+ * @param pName char*
+ * @param len int
+ * @return int 0: Error in parameters - 1: Ok
+ */
+int chargeName(char* pName, int len);
 
+
+/**
+ * @brief Charge hours worked for employee
+ *
+ * @param pHoursWorked int*
+ * @return int 0: Error in parameters - 1: Ok
+ */
+int chargeHoursWorked(int* pHoursWorked);
+
+
+/**
+ * @brief Charge salary for employee
+ *
+ * @param pSalary float*
+ * @return int 0: Error in parameters - 1: Ok
+ */
+int chargeSalary(float* pSalary);
+
+
+/**
+ * @brief Edit name of employee
+ *
+ * @param pEmployee Employee*
+ * @param len int
+ * @return int 0: Error in parameters - 1: Ok - 2: Error to get new name - 3: Error to set new name
+ */
+int employee_editName(Employee* pEmployee, int len);
+
+
+/**
+ * @brief Edit hours worked of employee
+ *
+ * @param pEmployee Employee*
+ * @return int 0: Error in parameters - 1: Ok - 2: Error to get new hours - 3: Error to set new hours
+ */
+int employee_editHoursWorked(Employee* pEmployee);
+
+
+/**
+ * @brief Edit salary of employee
+ *
+ * @param pEmployee Employee*
+ * @return int 0: Error in parameters - 1: Ok - 2: Error to get new salary - 3: Error to set new salary
+ */
+int employee_editSalary(Employee* pEmployee);
+
+
+/**
+ * @brief Validate if exists an employee with id
+ *
+ * @param pArrayLinkedList LinkedList*
+ * @param id int
+ * @return int 0: Not exists - 1: Exists
+ */
+int employee_validateId(LinkedList* pArrayLinkedList, int id);
 int validateName(char* name);
 int validateSalary(float salary);
 int validateHoursWorked(int hours);

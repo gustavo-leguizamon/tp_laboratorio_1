@@ -27,6 +27,15 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee);
  * @return int 0: Error in parameters - 1: Ok - 2: Error in data from user - 3: Error to build employee
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId);
+
+
+
+/**
+ * @brief Modificar datos de empleado
+ *
+ * @param pArrayListEmployee LinkedList*
+ * @return int
+ */
 int controller_editEmployee(LinkedList* pArrayListEmployee);
 int controller_removeEmployee(LinkedList* pArrayListEmployee);
 

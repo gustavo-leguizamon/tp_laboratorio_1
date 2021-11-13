@@ -15,6 +15,13 @@ enum enumMainMenu {
 };
 
 
+enum enumEditMenu {
+	optEditName = 1,
+	optEditHoursWorked,
+	optEditSalary,
+	optEditExitMenu
+};
+
 #define NAME_FILE_TEXT "data.csv"
 #define NAME_FILE_BIN  "data.bin"
 
@@ -27,3 +34,11 @@ enum enumMainMenu {
  * @return Selected option
  */
 int menu();
+
+
+/**
+ * @brief Displays a menu of options for edit
+ *
+ * @return Selected option
+ */
+int submenuEdit();
