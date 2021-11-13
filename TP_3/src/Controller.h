@@ -16,7 +16,17 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee);
  * @return int 0: No se pudo cargar el archivo - 1: Ok
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee);
-int controller_addEmployee(LinkedList* pArrayListEmployee);
+
+
+
+/**
+ * @brief Alta de empleados
+ *
+ * @param pArrayListEmployee LinkedList*
+ * @param pId int*
+ * @return int 0: Error in parameters - 1: Ok - 2: Error in data from user - 3: Error to build employee
+ */
+int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId);
 int controller_editEmployee(LinkedList* pArrayListEmployee);
 int controller_removeEmployee(LinkedList* pArrayListEmployee);
 

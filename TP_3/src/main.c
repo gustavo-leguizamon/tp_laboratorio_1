@@ -8,14 +8,15 @@
 
 /****************************************************
     Menu:
-     1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).a
+     1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
+     2. Cargar los datos de los empleados desde el archivo data.bin (modo binario).
      3. Alta de empleado
      4. Modificar datos de empleado
      5. Baja de empleado
      6. Listar empleados
      7. Ordenar empleados
      8. Guardar los datos de los empleados en el archivo data.csv (modo texto).
-     9. Guardar los datos de los empleados en el archivo data.csv (modo binario).
+     9. Guardar los datos de los empleados en el archivo data.bin (modo binario).
     10. Salir
 *****************************************************/
 
@@ -26,6 +27,7 @@ int main()
 
     int option;
 	int result;
+	int nextId = 1;
 
     LinkedList* listEmployees = ll_newLinkedList();
     if (listEmployees == NULL){
@@ -55,6 +57,15 @@ int main()
 					puts("Ocurrio un error al cargar los datos del archivo");
 				}
 				break;
+            case optRegisterEmployee:
+            	result = controller_addEmployee(listEmployees, &nextId);
+            	if (result == 1){
+            		puts("Alta exitosa");
+            	}
+            	else{
+            		puts("No se pudo dar de alta el empleado");
+            	}
+            	break;
             case optReportEmployees:
             	if (!ll_isEmpty(listEmployees)){
     				result = controller_ListEmployee(listEmployees);

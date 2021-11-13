@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "Employee.h"
+#include "myString.h"
+#include "input.h"
 
 
 
@@ -21,7 +24,8 @@ Employee* employee_new(){
 }
 
 
-Employee* employee_newParametros(char* idStr, char* nameStr, char* hoursWorkedStr, char* salaryStr){
+Employee* employee_newParametrosStr(char* idStr, char* nameStr, char* hoursWorkedStr, char* salaryStr){
+	/*
 	Employee* newEmployee;
 
 	newEmployee = employee_new();
@@ -29,7 +33,27 @@ Employee* employee_newParametros(char* idStr, char* nameStr, char* hoursWorkedSt
 		if (!(employee_setId(newEmployee, atoi(idStr)) &&
 			  employee_setNombre(newEmployee, nameStr) &&
 			  employee_setHorasTrabajadas(newEmployee, atoi(hoursWorkedStr)) &&
-			  employee_setSueldo(newEmployee, atoi(salaryStr)))){
+			  employee_setSueldo(newEmployee, atof(salaryStr)))){
+			free(newEmployee);
+			newEmployee = NULL;
+		}
+	}
+
+	return newEmployee;
+	*/
+
+	return employee_newParametros(atoi(idStr), nameStr, atoi(hoursWorkedStr), atof(salaryStr));
+}
+
+Employee* employee_newParametros(int id, char* name, int hoursWorked, float salary){
+	Employee* newEmployee;
+
+	newEmployee = employee_new();
+	if (newEmployee != NULL){
+		if (!(employee_setId(newEmployee, id) &&
+			  employee_setNombre(newEmployee, name) &&
+			  employee_setHorasTrabajadas(newEmployee, hoursWorked) &&
+			  employee_setSueldo(newEmployee, salary))){
 			free(newEmployee);
 			newEmployee = NULL;
 		}
@@ -115,7 +139,7 @@ int employee_getHorasTrabajadas(Employee* this, int* pHoursWorked){
 	return success;
 }
 
-int employee_setSueldo(Employee* this, int salary){
+int employee_setSueldo(Employee* this, float salary){
 	int success = 0;
 
 	if (this != NULL && salary > 0){
@@ -125,7 +149,7 @@ int employee_setSueldo(Employee* this, int salary){
 
 	return success;
 }
-int employee_getSueldo(Employee* this, int* pSalary){
+int employee_getSueldo(Employee* this, float* pSalary){
 	int success = 0;
 
 	if (this != NULL && pSalary != NULL){
@@ -142,14 +166,14 @@ int showEmployee(Employee* pEmployee){
 	int id;
 	char name[128];
 	int hoursWorked;
-	int salary;
+	float salary;
 
 	if (pEmployee != NULL &&
 		employee_getId(pEmployee, &id) &&
 		employee_getNombre(pEmployee, name) &&
 		employee_getHorasTrabajadas(pEmployee, &hoursWorked) &&
 		employee_getSueldo(pEmployee, &salary)){
-		printf("| %4d | %20s | %5d | $%6d |\n", id, name, hoursWorked, salary);
+		printf("| %4d | %20s | %5d | $%8.2f |\n", id, name, hoursWorked, salary);
 	}
 
 	return success;
@@ -173,4 +197,61 @@ int findHighestId(LinkedList* pArrayLinkedList, int* pId){
 	}
 
 	return result;
+}
+
+int chargeDataEmployee(char* pName, int* pHoursWorked, float* pSalary){
+	int result = 0;
+
+	if (pName != NULL && pHoursWorked != NULL && pSalary != NULL){
+		puts("     *** ALTA EMPLEADO ***          ");
+
+		getString("Ingrese nombre: ", pName, 128);
+		while (!validateName(pName)){
+			puts("El nombre no es valido");
+			getString("Ingrese nombre: ", pName, 128);
+		}
+		capitalize(pName);
+
+		getInt("Ingrese horas trabajadas: ", pHoursWorked);
+		while (!validateHoursWorked(*pHoursWorked)){
+			puts("Las horas ingresadas no son validas");
+			getInt("Ingrese horas trabajadas: ", pHoursWorked);
+		}
+
+		getFloat("Ingrese salario: ", pSalary);
+		while (!validateSalary(*pSalary)){
+			puts("El salario ingresado no es valido");
+			getFloat("Ingrese salario: ", pSalary);
+		}
+
+		result = 1;
+	}
+
+	return result;
+}
+
+
+int validateName(char* name){
+	int valid = 1;
+	int index = 1;
+
+	if (name != NULL){
+		while (name[index] != CHAR_NULL){
+			if (!isalpha(name[index]) && name[index] != ' '){
+				valid = 0;
+				break;
+			}
+			index++;
+		}
+	}
+
+	return valid;
+}
+
+int validateSalary(float salary){
+	return salary > 0;
+}
+
+int validateHoursWorked(int hours){
+	return hours > 0;
 }

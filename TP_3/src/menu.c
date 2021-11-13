@@ -11,7 +11,7 @@ int menu(){
 	puts("**** ABM de Empleados ***");
 	printf("%d. Cargar los datos de los empleados desde el archivo %s (modo texto)\n", optLoadEmployeesTextFile, NAME_FILE_TEXT);
 	printf("%d. Cargar los datos de los empleados desde el archivo %s (modo binario)\n", optLoadEmployeesBinaryFile, NAME_FILE_BIN);
-	//printf("%d. Alta de empleado\n", optRegisterEmployee);
+	printf("%d. Alta de empleado\n", optRegisterEmployee);
 	//printf("%d. Modificar datos de empleado\n", optEditEmployee);
 	//printf("%d. Baja de empleado\n", optDeleteEmployee);
 	printf("%d. Listar empleados\n", optReportEmployees);

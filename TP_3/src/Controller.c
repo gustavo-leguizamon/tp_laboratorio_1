@@ -44,16 +44,33 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
     return result;
 }
 
-/** \brief Alta de empleados
- *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
- *
- */
-int controller_addEmployee(LinkedList* pArrayListEmployee)
+
+int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId)
 {
-    return 1;
+    int result = 0;
+	char name[128];
+	int hoursWorked;
+	float salary;
+	Employee* auxEmployee;
+
+    if (pArrayListEmployee != NULL && pNextId != NULL){
+    	if (chargeDataEmployee(name, &hoursWorked, &salary)){
+    		auxEmployee = employee_newParametros(*pNextId, name, hoursWorked, salary);
+    		if (auxEmployee != NULL){
+    			ll_add(pArrayListEmployee, auxEmployee);
+    			*pNextId += 1;
+    			result = 1;
+    		}
+    		else{
+    			result = 3;
+    		}
+    	}
+    	else{
+    		result = 2;
+    	}
+    }
+
+    return result;
 }
 
 /** \brief Modificar datos de empleado
@@ -94,7 +111,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 	if (pArrayListEmployee != NULL){
 		success = 1;
 		//printHeader(columns, lengths, lenColumns);
-		printf("| %4s | %20s | %4s | %6s |\n", "ID", "NOMBRE", "HORAS", "SALARIO");
+		printf("| %4s | %20s | %4s | %9s |\n", "ID", "NOMBRE", "HORAS", "SALARIO");
 		for (int i = 0; i < ll_len(pArrayListEmployee); i++){
 			auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
 			showEmployee(auxEmployee);
