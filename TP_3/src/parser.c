@@ -71,7 +71,7 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 	return result;
 }
 
-
+/*
 int parser_SaveEmployeeInText(FILE* pFile, LinkedList* pArrayListEmployee){
 	int result = 0;
 	Employee* auxEmployee;
@@ -108,8 +108,9 @@ int parser_SaveEmployeeInText(FILE* pFile, LinkedList* pArrayListEmployee){
 
 	return result;
 }
+*/
 
-
+/*
 int parser_SaveEmployeeInBinary(FILE* pFile, LinkedList* pArrayListEmployee){
 	int result = 0;
 	Employee* auxEmployee;
@@ -137,3 +138,4 @@ int parser_SaveEmployeeInBinary(FILE* pFile, LinkedList* pArrayListEmployee){
 
 	return result;
 }
+*/

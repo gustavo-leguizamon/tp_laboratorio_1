@@ -233,18 +233,38 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
 {
 	int result = 0;
+	Employee* auxEmployee;
+	int count;
+	int id;
+	char name[128];
+	int hoursWorked;
+	float salary;
 
 	if (path != NULL && pArrayListEmployee != NULL){
 		FILE* file = fopen(path, "w");
 		if (file != NULL){
-			if (parser_SaveEmployeeInText(file, pArrayListEmployee) == 1){
-				result = 1;
-			}
-			else{
-				result = 3;
-			}
+			result = 1;
+			fprintf(file, "id,nombre,horasTrabajadas,sueldo\n"); //PRINT HEADER
 
-			fclose(file);
+			for (int i = 0; i < ll_len(pArrayListEmployee); i++){
+				auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
+				if (auxEmployee != NULL &&
+					employee_getId(auxEmployee, &id) &&
+					employee_getNombre(auxEmployee, name) &&
+					employee_getHorasTrabajadas(auxEmployee, &hoursWorked) &&
+					employee_getSueldo(auxEmployee, &salary)){
+					count = fprintf(file, "%d,%s,%d,%f\n", id, name, hoursWorked, salary);
+
+					if (count < 4){
+						result = 3;
+						break;
+					}
+				}
+				else{
+					result = 4;
+					break;
+				}
+			}
 		}
 		else{
 			result = 2;
@@ -259,15 +279,28 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
 int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
 {
 	int result = 0;
+	Employee* auxEmployee;
+	int count;
 
 	if (path != NULL && pArrayListEmployee != NULL){
 		FILE* file = fopen(path, "wb");
 		if (file != NULL){
-			if (parser_SaveEmployeeInBinary(file, pArrayListEmployee) == 1){
-				result = 1;
-			}
-			else{
-				result = 3;
+			result = 1;
+
+			for (int i = 0; i < ll_len(pArrayListEmployee); i++){
+				auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
+				if (auxEmployee != NULL){
+					count = fwrite(auxEmployee, sizeof(Employee), 1, file);
+
+					if (count < 1){
+						result = 3;
+						break;
+					}
+				}
+				else{
+					result = 4;
+					break;
+				}
 			}
 
 			fclose(file);

@@ -72,7 +72,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee);
  *
  * @param path char*
  * @param pArrayListEmployee LinkedList*
- * @return int 0: Error in parameters - 1: Ok - 2: Error to open file - 3: Error to save data
+ * @return int 0: Error in parameters - 1: Ok - 2: Error to open file - 3: Error to save data - 4: Error in data of employee
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee);
 
@@ -82,7 +82,7 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee);
  *
  * @param path char*
  * @param pArrayListEmployee LinkedList*
- * @return int 0: Error in parameters - 1: Ok - 2: Error to open file - 3: Error to save data
+ * @return int 0: Error in parameters - 1: Ok - 2: Error to open file - 3: Error to save data - 4: Error in data of employee
  */
 int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee);
 
