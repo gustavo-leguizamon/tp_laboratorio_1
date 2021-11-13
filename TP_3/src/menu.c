@@ -15,7 +15,7 @@ int menu(){
 	printf("%d. Modificar datos de empleado\n", optEditEmployee);
 	printf("%d. Baja de empleado\n", optDeleteEmployee);
 	printf("%d. Listar empleados\n", optReportEmployees);
-	//printf("%d. Ordenar empleados\n", optSortEmployees);
+	printf("%d. Ordenar empleados\n", optSortEmployees);
 	printf("%d. Guardar los datos de los empleados en el archivo %s (modo texto)\n", optSaveEmployeesTextFile, NAME_FILE_TEXT);
 	printf("%d. Guardar los datos de los empleados en el archivo %s (modo binario)\n", optSaveEmployeesBinaryFile, NAME_FILE_BIN);
 	printf("%d. Salir\n", optExitMainMenu);

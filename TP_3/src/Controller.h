@@ -56,6 +56,14 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee);
  * @return int 0: Error in parameters - 1: Ok
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee);
+
+
+/**
+ * @brief Ordenar empleados
+ *
+ * @param pArrayListEmployee LinkedList*
+ * @return int 0: Error in parameters - 1: Ok
+ */
 int controller_sortEmployee(LinkedList* pArrayListEmployee);
 
 

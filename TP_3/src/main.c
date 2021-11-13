@@ -108,6 +108,20 @@ int main()
 					}
             	}
             	break;
+            case optSortEmployees:
+            	if (ll_isEmpty(listEmployees)){
+					puts("NO hay empleados cargados en el sistema");
+				}
+				else{
+					result = controller_sortEmployee(listEmployees);
+					if (result){
+						puts("Empleados ordenados");
+					}
+					else{
+						puts("Ocurrio un error al ordenar los empleados");
+					}
+				}
+            	break;
             case optSaveEmployeesTextFile:
             	if (!ll_isEmpty(listEmployees)){
                 	result = controller_saveAsText(NAME_FILE_TEXT, listEmployees);

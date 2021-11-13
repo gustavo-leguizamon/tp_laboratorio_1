@@ -103,6 +103,16 @@ int employee_editSalary(Employee* pEmployee);
 
 
 /**
+ * @brief Order employees by name
+ *
+ * @param pEmployeeA void*
+ * @param pEmployeeB void*
+ * @return int -2: Error in parameters - -1: EmployeeA greater than EmployeeB - 0: EmployeeA equal to EmployeeB - 1: EmployeeB greater than EmployeeA
+ */
+int employee_orderByName(void* pEmployeeA, void* pEmployeeB);
+
+
+/**
  * @brief Validate if exists an employee with id
  *
  * @param pArrayLinkedList LinkedList*

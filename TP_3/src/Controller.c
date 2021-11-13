@@ -213,16 +213,20 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
     return result;
 }
 
-/** \brief Ordenar empleados
- *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int result = 0;
+
+    if (pArrayListEmployee != NULL){
+    	//ll_sort(LinkedList* this, int(*)(void*,void*) pFunc, int order)
+
+    	puts("Ordenando los empleados por nombre...Por favor espere");
+    	ll_sort(pArrayListEmployee, employee_orderByName, 1);
+    	result = 1;
+    }
+
+    return result;
 }
 
 

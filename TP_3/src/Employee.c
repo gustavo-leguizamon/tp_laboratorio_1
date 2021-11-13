@@ -166,7 +166,7 @@ void printHeaderEmployee(){
 }
 
 int showEmployee(Employee* pEmployee){
-	int success = 0;
+	int result = 0;
 	int id;
 	char name[128];
 	int hoursWorked;
@@ -177,10 +177,10 @@ int showEmployee(Employee* pEmployee){
 		employee_getNombre(pEmployee, name) &&
 		employee_getHorasTrabajadas(pEmployee, &hoursWorked) &&
 		employee_getSueldo(pEmployee, &salary)){
-		printf("| %4d | %20s | %5d | $%8.2f |\n", id, name, hoursWorked, salary);
+		printf("| %4d | %-20s | %5d | $%8.2f |\n", id, name, hoursWorked, salary);
 	}
 
-	return success;
+	return result;
 }
 
 int findHighestId(LinkedList* pArrayLinkedList, int* pId){
@@ -349,6 +349,24 @@ int employee_editSalary(Employee* pEmployee){
 
 	return result;
 }
+
+
+
+int employee_orderByName(void* pEmployeeA, void* pEmployeeB){
+	int result = -2;
+	Employee* auxEmployeeA = NULL;
+	Employee* auxEmployeeB = NULL;
+
+	if (pEmployeeA != NULL && pEmployeeB != NULL){
+		auxEmployeeA = (Employee*)pEmployeeA;
+		auxEmployeeB = (Employee*)pEmployeeB;
+
+		result = strcmp(auxEmployeeA->nombre, auxEmployeeB->nombre);
+	}
+
+	return result;
+}
+
 
 
 
