@@ -80,6 +80,23 @@ int main()
 					}
             	}
             	break;
+            case optDeleteEmployee:
+            	if (ll_isEmpty(listEmployees)){
+        			puts("NO hay empleados cargados en el sistema");
+            	}
+            	else{
+            		result = controller_removeEmployee(listEmployees);
+					if (result == 1){
+						puts("Exito al eliminar al empleado");
+					}
+					else if (result == 2){
+						puts("Eliminacion cancelada por el usuario");
+					}
+					else{
+						puts("Ocurrio un error al eliminar el empleado");
+					}
+            	}
+            	break;
             case optReportEmployees:
             	if (ll_isEmpty(listEmployees)){
         			puts("NO hay empleados cargados en el sistema");

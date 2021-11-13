@@ -34,9 +34,18 @@ int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId);
  * @brief Modificar datos de empleado
  *
  * @param pArrayListEmployee LinkedList*
- * @return int
+ * @return int 0: Error in parameters - 1: Ok
  */
 int controller_editEmployee(LinkedList* pArrayListEmployee);
+
+
+
+/**
+ * @brief Baja de empleado
+ *
+ * @param pArrayListEmployee LinkedList*
+ * @return int 0: Error in parameters - 1: Ok - 2: Canceled by user
+ */
 int controller_removeEmployee(LinkedList* pArrayListEmployee);
 
 

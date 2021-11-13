@@ -100,6 +100,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     	auxEmployee = (Employee*)ll_get(pArrayListEmployee, indexEmployee);
 
 		printHeaderEmployee();
+		showEmployee(auxEmployee);
     	//do{
     		option = submenuEdit();
 			switch(option){
@@ -143,22 +144,54 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     return result;
 }
 
-/** \brief Baja de empleado
- *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int result = 0;
+    Employee* auxEmployee = NULL;
+    int idEmployee;
+    int indexEmployee = -1;
+    char confirm = 'n';
+
+    if (pArrayListEmployee != NULL){
+    	controller_ListEmployee(pArrayListEmployee);
+
+    	getInt("Ingrese ID de empleado: ", &idEmployee);
+
+    	while (indexEmployee == -1){
+    		indexEmployee = employee_validateId(pArrayListEmployee, idEmployee);
+    		if (indexEmployee == -1){
+    			getInt("ID invalido. Ingrese ID de empleado: ", &idEmployee);
+    		}
+    	}
+
+    	auxEmployee = (Employee*)ll_get(pArrayListEmployee, indexEmployee);
+
+    	puts("\nEMPLEADO:");
+		printHeaderEmployee();
+		showEmployee(auxEmployee);
+
+		getChar("Confirma eliminacion del empleado? n(NO) - s(SI): ", &confirm);
+		while (confirm != 'n' && confirm != 's'){
+			getChar("Escriba n o s. Confirma eliminacion del empleado? n(NO) - s(SI): ", &confirm);
+		}
+
+		if (confirm == 's'){
+			ll_remove(pArrayListEmployee, indexEmployee);
+			result = 1;
+		}
+		else{
+			result = 2;
+		}
+    }
+
+    return result;
 }
 
 
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
-	int success = 0;
+	int result = 0;
 	Employee* auxEmployee = NULL;
 	/*
 	int lenColumns = 4;
@@ -167,7 +200,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 	*/
 
 	if (pArrayListEmployee != NULL){
-		success = 1;
+		result = 1;
 		//printHeader(columns, lengths, lenColumns);
 		printHeaderEmployee();
 		for (int i = 0; i < ll_len(pArrayListEmployee); i++){
@@ -177,7 +210,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 		}
 	}
 
-    return success;
+    return result;
 }
 
 /** \brief Ordenar empleados
