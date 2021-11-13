@@ -28,6 +28,10 @@ int main()
 	int result;
 
     LinkedList* listEmployees = ll_newLinkedList();
+    if (listEmployees == NULL){
+    	puts("No se pudo iniciar la lista");
+    	exit(EXIT_FAILURE);
+    }
 
     do{
     	option = menu();

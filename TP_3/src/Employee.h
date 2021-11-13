@@ -1,3 +1,6 @@
+
+#include "LinkedList.h"
+
 #ifndef employee_H_INCLUDED
 #define employee_H_INCLUDED
 typedef struct
@@ -25,5 +28,7 @@ int employee_setSueldo(Employee* this, int salary);
 int employee_getSueldo(Employee* this, int* pSalary);
 
 int showEmployee(Employee* pEmployee);
+
+int findHighestId(LinkedList* pArrayLinkedList, int* pId);
 
 #endif // employee_H_INCLUDED

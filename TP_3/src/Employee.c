@@ -154,3 +154,23 @@ int showEmployee(Employee* pEmployee){
 
 	return success;
 }
+
+int findHighestId(LinkedList* pArrayLinkedList, int* pId){
+	int result = 0;
+	int highestId = 0;
+	Employee* auxEmployee = NULL;
+
+	if (pArrayLinkedList != NULL && pId != NULL){
+		for (int i = 0; i < ll_len(pArrayLinkedList); i++){
+			auxEmployee = ll_get(pArrayLinkedList, i);
+			if (auxEmployee->id > highestId){
+				highestId = auxEmployee->id;
+			}
+		}
+
+		*pId = highestId + 1;
+		result = 1;
+	}
+
+	return result;
+}
