@@ -377,6 +377,30 @@ int employee_editSalary(Employee* pEmployee){
 
 
 
+int employee_compareById(void* pEmployeeA, void* pEmployeeB){
+	int result = -2;
+	Employee* auxEmployeeA = NULL;
+	Employee* auxEmployeeB = NULL;
+
+	if (pEmployeeA != NULL && pEmployeeB != NULL){
+		auxEmployeeA = (Employee*)pEmployeeA;
+		auxEmployeeB = (Employee*)pEmployeeB;
+
+		if (auxEmployeeA->id > auxEmployeeB->id){
+			result = 1;
+		}
+		else if (auxEmployeeA->id < auxEmployeeB->id){
+			result = -1;
+		}
+		else{
+			result = 0;
+		}
+	}
+
+	return result;
+}
+
+
 int employee_compareByName(void* pEmployeeA, void* pEmployeeB){
 	int result = -2;
 	Employee* auxEmployeeA = NULL;
@@ -387,6 +411,54 @@ int employee_compareByName(void* pEmployeeA, void* pEmployeeB){
 		auxEmployeeB = (Employee*)pEmployeeB;
 
 		result = strcmp(auxEmployeeA->nombre, auxEmployeeB->nombre);
+	}
+
+	return result;
+}
+
+
+int employee_compareByHoursWorked(void* pEmployeeA, void* pEmployeeB){
+	int result = -2;
+	Employee* auxEmployeeA = NULL;
+	Employee* auxEmployeeB = NULL;
+
+	if (pEmployeeA != NULL && pEmployeeB != NULL){
+		auxEmployeeA = (Employee*)pEmployeeA;
+		auxEmployeeB = (Employee*)pEmployeeB;
+
+		if (auxEmployeeA->horasTrabajadas > auxEmployeeB->horasTrabajadas){
+			result = 1;
+		}
+		else if (auxEmployeeA->horasTrabajadas < auxEmployeeB->horasTrabajadas){
+			result = -1;
+		}
+		else{
+			result = 0;
+		}
+	}
+
+	return result;
+}
+
+
+int employee_compareBySalary(void* pEmployeeA, void* pEmployeeB){
+	int result = -2;
+	Employee* auxEmployeeA = NULL;
+	Employee* auxEmployeeB = NULL;
+
+	if (pEmployeeA != NULL && pEmployeeB != NULL){
+		auxEmployeeA = (Employee*)pEmployeeA;
+		auxEmployeeB = (Employee*)pEmployeeB;
+
+		if (auxEmployeeA->sueldo > auxEmployeeB->sueldo){
+			result = 1;
+		}
+		else if (auxEmployeeA->sueldo < auxEmployeeB->sueldo){
+			result = -1;
+		}
+		else{
+			result = 0;
+		}
 	}
 
 	return result;

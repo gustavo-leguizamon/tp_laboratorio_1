@@ -43,3 +43,22 @@ int submenuEdit(){
 
 	return selectedOption;
 }
+
+
+int submenuOrder(){
+	int selectedOption;
+
+	puts("**** TIPO DE ORDENAMIENTO ***");
+	printf("%d. Por ID\n", optOrderId);
+	printf("%d. Por Nombre\n", optOrderName);
+	printf("%d. Por Horas trabajadas\n", optOrderHoursWorked);
+	printf("%d. Por Salario\n", optOrderSalary);
+	printf("%d. Salir\n", optOrderExitMenu);
+	printf("\n");
+
+	getInt("Ingrese una opcion: ", &selectedOption);
+	puts("");
+
+	return selectedOption;
+}
+

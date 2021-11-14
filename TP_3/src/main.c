@@ -136,8 +136,11 @@ int main()
 				}
 				else{
 					result = controller_sortEmployee(listEmployees);
-					if (result){
+					if (result == 1){
 						puts("Empleados ordenados");
+					}
+					else if (result == 2){
+						puts("No se selecciono metodo de ordenamiento");
 					}
 					else{
 						puts("Ocurrio un error al ordenar los empleados");

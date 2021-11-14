@@ -23,6 +23,16 @@ enum enumEditMenu {
 };
 
 
+enum enumOrderMenu {
+	optOrderId = 1,
+	optOrderName,
+	optOrderHoursWorked,
+	optOrderSalary,
+	optOrderExitMenu
+};
+
+
+
 #endif /* SRC_MENU_H_ */
 
 
@@ -40,3 +50,11 @@ int menu();
  * @return Selected option
  */
 int submenuEdit();
+
+
+/**
+ * @brief Displays a menu of options for order employees
+ *
+ * @return Selected option
+ */
+int submenuOrder();

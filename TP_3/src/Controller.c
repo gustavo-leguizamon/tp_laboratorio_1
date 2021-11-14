@@ -263,13 +263,38 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
     int result = 0;
+    int option;
 
     if (pArrayListEmployee != NULL){
-    	//ll_sort(LinkedList* this, int(*)(void*,void*) pFunc, int order)
-
-    	puts("Ordenando los empleados por nombre...Por favor espere");
-    	ll_sort(pArrayListEmployee, employee_compareByName, 1);
     	result = 1;
+
+    	//ll_sort(LinkedList* this, int(*)(void*,void*) pFunc, int order)
+    	option = submenuOrder();
+    	switch(option){
+			case optOrderId:
+		    	puts("Ordenando los empleados por ID...Por favor espere");
+		    	ll_sort(pArrayListEmployee, employee_compareById, 1);
+				break;
+			case optOrderName:
+		    	puts("Ordenando los empleados por nombre...Por favor espere");
+		    	ll_sort(pArrayListEmployee, employee_compareByName, 1);
+				break;
+			case optOrderHoursWorked:
+		    	puts("Ordenando los empleados por horas trabajadas...Por favor espere");
+		    	ll_sort(pArrayListEmployee, employee_compareByHoursWorked, 1);
+				break;
+			case optOrderSalary:
+		    	puts("Ordenando los empleados por salario...Por favor espere");
+		    	ll_sort(pArrayListEmployee, employee_compareBySalary, 1);
+				break;
+			case optOrderExitMenu:
+				result = 2;
+				break;
+			default:
+				puts("Opcion invalida");
+				break;
+    	}
+		puts("\n");
     }
 
     return result;

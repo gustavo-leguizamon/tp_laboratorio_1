@@ -236,6 +236,16 @@ int employee_editSalary(Employee* pEmployee);
 
 
 /**
+ * @brief Function that compares employees by id
+ *
+ * @param pEmployeeA void*
+ * @param pEmployeeB void*
+ * @return int -2: Error in parameters - -1: EmployeeA greater than EmployeeB - 0: EmployeeA equal to EmployeeB - 1: EmployeeB greater than EmployeeA
+ */
+int employee_compareById(void* pEmployeeA, void* pEmployeeB);
+
+
+/**
  * @brief Function that compares employees by name
  *
  * @param pEmployeeA void*
@@ -243,6 +253,26 @@ int employee_editSalary(Employee* pEmployee);
  * @return int -2: Error in parameters - -1: EmployeeA greater than EmployeeB - 0: EmployeeA equal to EmployeeB - 1: EmployeeB greater than EmployeeA
  */
 int employee_compareByName(void* pEmployeeA, void* pEmployeeB);
+
+
+/**
+ * @brief Function that compares employees by hours worked
+ *
+ * @param pEmployeeA void*
+ * @param pEmployeeB void*
+ * @return int -2: Error in parameters - -1: EmployeeA greater than EmployeeB - 0: EmployeeA equal to EmployeeB - 1: EmployeeB greater than EmployeeA
+ */
+int employee_compareByHoursWorked(void* pEmployeeA, void* pEmployeeB);
+
+
+/**
+ * @brief Function that compares employees by salary
+ *
+ * @param pEmployeeA void*
+ * @param pEmployeeB void*
+ * @return int -2: Error in parameters - -1: EmployeeA greater than EmployeeB - 0: EmployeeA equal to EmployeeB - 1: EmployeeB greater than EmployeeA
+ */
+int employee_compareBySalary(void* pEmployeeA, void* pEmployeeB);
 
 
 /**
