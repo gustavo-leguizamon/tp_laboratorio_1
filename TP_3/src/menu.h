@@ -22,8 +22,6 @@ enum enumEditMenu {
 	optEditExitMenu
 };
 
-#define NAME_FILE_TEXT "data.csv"
-#define NAME_FILE_BIN  "data.bin"
 
 #endif /* SRC_MENU_H_ */
 

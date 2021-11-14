@@ -29,6 +29,8 @@ int main()
     int option;
 	int result;
 	int nextId = 1;
+	int lenPath = 150;
+	char path[lenPath];
 	//int auxNextId;
 
     LinkedList* listEmployees = ll_newLinkedList();
@@ -44,7 +46,8 @@ int main()
         switch(option)
         {
             case optMainLoadEmployeesTextFile:
-            	result = controller_loadFromText(NAME_FILE_TEXT, listEmployees);
+            	controller_loadNameOfFile(path, lenPath);
+            	result = controller_loadFromText(path, listEmployees);
                 if (result == 1){
                 	employee_findHighestId(listEmployees, &nextId);
                 	puts("Se cargaron los datos desde el archivo");
@@ -52,12 +55,16 @@ int main()
                 else if (result == 2){
                 	puts("Carga de datos cancelada por el usuario");
                 }
+                else if(result == 3){
+                	puts("No se pudo leer el archivo, asegurese de que exista");
+                }
                 else{
                 	puts("Ocurrio un error al cargar los datos del archivo");
                 }
                 break;
             case optMainLoadEmployeesBinaryFile:
-            	result = controller_loadFromBinary(NAME_FILE_BIN, listEmployees);
+            	controller_loadNameOfFile(path, lenPath);
+            	result = controller_loadFromBinary(path, listEmployees);
 				if (result == 1){
                 	employee_findHighestId(listEmployees, &nextId);
 					puts("Se cargaron los datos desde el archivo");
@@ -65,12 +72,15 @@ int main()
                 else if (result == 2){
                 	puts("Carga de datos cancelada por el usuario");
                 }
+                else if(result == 3){
+                	puts("No se pudo leer el archivo, asegurese de que exista");
+                }
 				else{
 					puts("Ocurrio un error al cargar los datos del archivo");
 				}
 				break;
             case optMainRegisterEmployee:
-            	result = controller_addEmployee(listEmployees, &nextId, PATH_FILE_LAST_ID);
+            	result = controller_addEmployee(listEmployees, &nextId);
             	if (result == 1){
             		puts("Alta exitosa");
             	}
@@ -136,11 +146,15 @@ int main()
             	break;
             case optMainSaveEmployeesTextFile:
             	if (!ll_isEmpty(listEmployees)){
-                	result = controller_saveAsText(NAME_FILE_TEXT, listEmployees);
+                	controller_loadNameOfFile(path, lenPath);
+                	result = controller_saveAsText(path, listEmployees);
                 	if (result){
                 		if (result == 1){
-                    		printf("Empleados guardados con exito en el archivo: %s\n", NAME_FILE_TEXT);
+                    		printf("Empleados guardados con exito en el archivo: %s\n", path);
                 		}
+						else if(result == 5){
+							puts("Guardado cancelado por el usuario");
+						}
                 		else{
                     		puts("Ocurrio un error al intentar guardar el archivo");
                 		}
@@ -155,10 +169,14 @@ int main()
             	break;
             case optMainSaveEmployeesBinaryFile:
             	if (!ll_isEmpty(listEmployees)){
-					result = controller_saveAsBinary(NAME_FILE_BIN, listEmployees);
+                	controller_loadNameOfFile(path, lenPath);
+					result = controller_saveAsBinary(path, listEmployees);
 					if (result){
 						if (result == 1){
-							printf("Empleados guardados con exito en el archivo: %s\n", NAME_FILE_BIN);
+							printf("Empleados guardados con exito en el archivo: %s\n", path);
+						}
+						else if(result == 5){
+							puts("Guardado cancelado por el usuario");
 						}
 						else{
 							puts("Ocurrio un error al intentar guardar el archivo");

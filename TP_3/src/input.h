@@ -9,12 +9,12 @@
 
 #endif /* INPUT_H_ */
 
-int getInt(char message[], int* input);
+int getInt(char* message, int* input);
 
-int getFloat(char message[], float* input);
+int getFloat(char* message, float* input);
 
-int getChar(char message[], char* input);
+int getChar(char* message, char* input);
 
-int getString(char message[], char input[], int len);
+int getString(char* message, char* input, int len);
 
-int getDate(char message[], eFecha* input);
+int getDate(char* message, eFecha* input);

@@ -9,7 +9,20 @@
 #include "input.h"
 
 
-int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
+
+int controller_loadNameOfFile(char* fileName, int len){
+	int result = 0;
+
+	if (fileName != NULL){
+		getString("Indique el path del archivo: ", fileName, len);
+		result = 1;
+	}
+
+	return result;
+}
+
+
+int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 {
 	int result = 0;
 	char confirmDeleteData = 's';
@@ -36,6 +49,9 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 			}
 
 			fclose(file);
+		}
+		else{
+			result = 3;
 		}
 	}
 
@@ -70,13 +86,16 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 
 			fclose(file);
 		}
+		else{
+			result = 3;
+		}
 	}
 
     return result;
 }
 
 
-int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId, char* pathIdFile)
+int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId)
 {
     int result = 0;
 	char name[128];
@@ -84,7 +103,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee, int* pNextId, char* p
 	float salary;
 	Employee* auxEmployee;
 
-    if (pArrayListEmployee != NULL && pNextId != NULL && pathIdFile != NULL){
+    if (pArrayListEmployee != NULL && pNextId != NULL){
 		puts("     *** ALTA EMPLEADO ***          ");
     	if (employee_chargeData(name, &hoursWorked, &salary)){
     		auxEmployee = employee_newParametros(*pNextId, name, hoursWorked, salary);
@@ -133,8 +152,11 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
     	auxEmployee = (Employee*)ll_get(pArrayListEmployee, indexEmployee);
 
+    	puts("\n******************************************************************************");
+    	puts("EMPLEADO:");
 		employee_printHeaderReport();
 		employee_showEmployee(auxEmployee);
+		puts("");
     	//do{
     		option = submenuEdit();
 			switch(option){
@@ -201,9 +223,11 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 
     	auxEmployee = (Employee*)ll_get(pArrayListEmployee, indexEmployee);
 
-    	puts("\nEMPLEADO:");
+    	puts("\n******************************************************************************");
+    	puts("EMPLEADO:");
 		employee_printHeaderReport();
 		employee_showEmployee(auxEmployee);
+		puts("");
 
 		getChar("Confirma eliminacion del empleado? n(NO) - s(SI): ", &confirm);
 		while (confirm != 'n' && confirm != 's'){
@@ -255,7 +279,8 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
 {
 	int result = 0;
-	Employee* auxEmployee;
+	Employee* auxEmployee = NULL;
+	char confirm = 's';
 	int count;
 	int id;
 	char name[128];
@@ -263,33 +288,48 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
 	float salary;
 
 	if (path != NULL && pArrayListEmployee != NULL){
-		FILE* file = fopen(path, "w");
-		if (file != NULL){
-			result = 1;
-			fprintf(file, "id,nombre,horasTrabajadas,sueldo\n"); //PRINT HEADER
+		FILE* fileR = fopen(path, "r");
+		if (fileR != NULL){
+			getChar("Existe otro archivo con el mismo nombre. Confirma sobreescribirlo? n(NO) - s(SI): ", &confirm);
+			while (confirm != 'n' && confirm != 's'){
+				getChar("Escriba n o s. Confirma sobreescribir el archivo? n(NO) - s(SI): ", &confirm);
+			}
+			fclose(fileR);
+		}
 
-			for (int i = 0; i < ll_len(pArrayListEmployee); i++){
-				auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
-				if (auxEmployee != NULL &&
-					employee_getId(auxEmployee, &id) &&
-					employee_getNombre(auxEmployee, name) &&
-					employee_getHorasTrabajadas(auxEmployee, &hoursWorked) &&
-					employee_getSueldo(auxEmployee, &salary)){
-					count = fprintf(file, "%d,%s,%d,%f\n", id, name, hoursWorked, salary);
+		if (confirm == 's'){
+			FILE* file = fopen(path, "w");
+			if (file != NULL){
+				result = 1;
+				fprintf(file, "id,nombre,horasTrabajadas,sueldo\n"); //PRINT HEADER
 
-					if (count < 4){
-						result = 3;
+				for (int i = 0; i < ll_len(pArrayListEmployee); i++){
+					auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
+					if (auxEmployee != NULL &&
+						employee_getId(auxEmployee, &id) &&
+						employee_getNombre(auxEmployee, name) &&
+						employee_getHorasTrabajadas(auxEmployee, &hoursWorked) &&
+						employee_getSueldo(auxEmployee, &salary)){
+						count = fprintf(file, "%d,%s,%d,%f\n", id, name, hoursWorked, salary);
+
+						if (count < 4){
+							result = 3;
+							break;
+						}
+					}
+					else{
+						result = 4;
 						break;
 					}
 				}
-				else{
-					result = 4;
-					break;
-				}
+				fclose(file);
+			}
+			else{
+				result = 2;
 			}
 		}
 		else{
-			result = 2;
+			result = 5;
 		}
 	}
 
@@ -301,34 +341,49 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
 int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
 {
 	int result = 0;
-	Employee* auxEmployee;
+	Employee* auxEmployee = NULL;
+	char confirm = 's';
 	int count;
 
 	if (path != NULL && pArrayListEmployee != NULL){
-		FILE* file = fopen(path, "wb");
-		if (file != NULL){
-			result = 1;
+		FILE* fileR = fopen(path, "r");
+		if (fileR != NULL){
+			getChar("Existe otro archivo con el mismo nombre. Confirma sobreescribirlo? n(NO) - s(SI): ", &confirm);
+			while (confirm != 'n' && confirm != 's'){
+				getChar("Escriba n o s. Confirma sobreescribir el archivo? n(NO) - s(SI): ", &confirm);
+			}
+			fclose(fileR);
+		}
 
-			for (int i = 0; i < ll_len(pArrayListEmployee); i++){
-				auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
-				if (auxEmployee != NULL){
-					count = fwrite(auxEmployee, sizeof(Employee), 1, file);
+		if (confirm == 's'){
+			FILE* file = fopen(path, "wb");
+			if (file != NULL){
+				result = 1;
 
-					if (count < 1){
-						result = 3;
+				for (int i = 0; i < ll_len(pArrayListEmployee); i++){
+					auxEmployee = (Employee*)ll_get(pArrayListEmployee, i);
+					if (auxEmployee != NULL){
+						count = fwrite(auxEmployee, sizeof(Employee), 1, file);
+
+						if (count < 1){
+							result = 3;
+							break;
+						}
+					}
+					else{
+						result = 4;
 						break;
 					}
 				}
-				else{
-					result = 4;
-					break;
-				}
-			}
 
-			fclose(file);
+				fclose(file);
+			}
+			else{
+				result = 2;
+			}
 		}
 		else{
-			result = 2;
+			result = 5;
 		}
 	}
 

@@ -4,7 +4,7 @@
 
 #include "input.h"
 
-int getInt(char message[], int* input){
+int getInt(char* message, int* input){
 	int success = 0;
 
 	if (message != NULL && input != NULL){
@@ -23,7 +23,7 @@ int getInt(char message[], int* input){
 	return success;
 }
 
-int getFloat(char message[], float* input){
+int getFloat(char* message, float* input){
 	int success = 0;
 
 	if (message != NULL && input != NULL){
@@ -42,7 +42,7 @@ int getFloat(char message[], float* input){
 	return success;
 }
 
-int getChar(char message[], char* input){
+int getChar(char* message, char* input){
 	int success = 0;
 
 	if (message != NULL && input != NULL){
@@ -56,7 +56,7 @@ int getChar(char message[], char* input){
 	return success;
 }
 
-int getString(char message[], char input[], int len){
+int getString(char* message, char* input, int len){
 	int success = 0;
 
 	char auxStr[len];
@@ -67,7 +67,7 @@ int getString(char message[], char input[], int len){
 		gets(auxStr);
 
 		while (strlen(auxStr) > len){
-			printf("Reingrese un texto mas corto, hasta %d carateres", len - 1);
+			printf("Reingrese un texto mas corto, hasta %d caracteres", len - 1);
 			fflush(stdin);
 			gets(auxStr);
 		}
@@ -80,7 +80,7 @@ int getString(char message[], char input[], int len){
 	return success;
 }
 
-int getDate(char message[], eFecha* input){
+int getDate(char* message, eFecha* input){
 	int success = 0;
 
 	if (message != NULL && input != NULL){
