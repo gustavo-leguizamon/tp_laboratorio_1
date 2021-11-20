@@ -461,3 +461,43 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 
 }
 
+
+LinkedList* ll_filter(LinkedList* this, int(*pFunc)(void*)){
+	LinkedList* filterList = NULL;
+	int tam;
+	void* aux = NULL;
+
+	if (this != NULL && pFunc != NULL){
+		filterList = ll_newLinkedList();
+		if (filterList != NULL){
+			tam = ll_len(this);
+			for (int i = 0; i < tam; i++){
+				aux = ll_get(this, i);
+				if (pFunc(aux)){
+					ll_add(filterList, aux);
+				}
+			}
+		}
+	}
+
+	return filterList;
+}
+
+/*EJEMPLO
+
+int filterMasculino(void e){
+	int ok = 0;
+	eEmpleado emp = NULL;
+
+	if (e != NULL){
+		emp = (eEmpleado*)e
+		if (emp->sexo == 'm'){
+			ok = 1;
+		}
+	}
+
+	return ok;
+}
+
+*/
+ */
