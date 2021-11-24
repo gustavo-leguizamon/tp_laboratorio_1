@@ -64,6 +64,7 @@ int main(void)
 	char path[lenPath];
 
 	LinkedList* listPets = ll_newLinkedList();
+	LinkedList* listAppointments = ll_newLinkedList();
 	if (listPets == NULL){
 		puts("No se pudo iniciar la lista");
 		exit(EXIT_FAILURE);
@@ -159,6 +160,31 @@ int main(void)
 					}
 					else{
 						puts("Ocurrio un error al ordenar las mascotas");
+					}
+				}
+				break;
+			case optAddAppointment:
+				if (ll_isEmpty(listPets)){
+					puts("NO hay mascotas cargadas en el sistema");
+				}
+				else{
+					result = controller_addAppointment(listAppointments, listPets);
+					if (result == 1){
+						puts("Turno registrado");
+					}
+					else{
+						puts("Ocurrio un error al registrar el turno");
+					}
+				}
+				break;
+			case optOrderOfAppointment:
+				if (ll_isEmpty(listPets)){
+					puts("NO hay mascotas cargadas en el sistema");
+				}
+				else{
+					result = controller_orderOfAppointment(listAppointments, listPets);
+					if (result != 1){
+						puts("Ocurrio un error al buscar orden de turno");
 					}
 				}
 				break;

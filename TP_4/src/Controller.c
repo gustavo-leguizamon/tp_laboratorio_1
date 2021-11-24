@@ -321,3 +321,83 @@ int controller_saveAsBinary(char* path, LinkedList* pPets)
 
 	return result;
 }
+
+
+
+int controller_addAppointment(LinkedList* pAppointments, LinkedList* pPets){
+	int result = 0;
+	int idPet;
+	int indexPet;
+	Pet* auxPet = NULL;
+
+	if (pAppointments != NULL && pPets != NULL){
+    	pet_showPets(pPets);
+
+    	getInt("Ingrese ID de mascota: ", &idPet);
+
+    	while (indexPet == -1){
+    		indexPet = pet_validateId(pPets, idPet);
+    		if (indexPet == -1){
+    			getInt("ID invalido. Ingrese ID de mascota: ", &idPet);
+    		}
+    	}
+
+    	auxPet = (Pet*)ll_get(pPets, indexPet);
+
+    	puts("\n******************************************************************************");
+    	puts("MASCOTA:");
+		pet_printHeaderReport();
+		pet_showPet(auxPet);
+		puts("");
+
+		ll_add(pAppointments, auxPet);
+		result = 1;
+	}
+
+	return result;
+}
+
+
+
+int controller_orderOfAppointment(LinkedList* pAppointments, LinkedList* pPets){
+	int result = 0;
+	int idPet;
+	int indexPet;
+	Pet* auxPet = NULL;
+	int numberOfAppointment;
+
+	if (pAppointments != NULL && pPets != NULL){
+    	pet_showPets(pPets);
+
+    	getInt("Ingrese ID de mascota: ", &idPet);
+
+    	while (indexPet == -1){
+    		indexPet = pet_validateId(pPets, idPet);
+    		if (indexPet == -1){
+    			getInt("ID invalido. Ingrese ID de mascota: ", &idPet);
+    		}
+    	}
+
+    	auxPet = (Pet*)ll_get(pPets, indexPet);
+
+    	puts("\n******************************************************************************");
+    	puts("MASCOTA:");
+		pet_printHeaderReport();
+		pet_showPet(auxPet);
+		puts("");
+
+		if (ll_contains(pAppointments, auxPet)){
+			numberOfAppointment = ll_indexOf(pAppointments, auxPet);
+			printf("La mascota esta numero %d en la lista de espera\n", numberOfAppointment + 1);
+		}
+		else{
+			puts("La mascota no tiene turno");
+		}
+		if (numberOfAppointment == -1){
+
+		}
+		result = 1;
+	}
+
+	return result;
+}

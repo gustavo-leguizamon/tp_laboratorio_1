@@ -161,6 +161,7 @@ int pet_showPet(Pet* pPet){
 		pet_getId(pPet, &id) &&
 		pet_getName(pPet, name)){
 		printf("| %4d | %-20s |\n", id, name);
+		result = 1;
 	}
 
 	return result;

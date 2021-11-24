@@ -90,4 +90,24 @@ int controller_saveAsText(char* path , LinkedList* pPets);
 int controller_saveAsBinary(char* path, LinkedList* pPets);
 
 
+/**
+ * @brief Add a new appointment
+ *
+ * @param pAppointments LinkedList*
+ * @param pPets LinkedList*
+ * @return 0: Error in parameters - 1: Ok
+ */
+int controller_addAppointment(LinkedList* pAppointments, LinkedList* pPets);
+
+
+/**
+ * @brief Show number of order
+ *
+ * @param pAppointments LinkedList*
+ * @param pPets LinkedList*
+ * @return 0: Error in parameters - 1: ok
+ */
+int controller_orderOfAppointment(LinkedList* pAppointments, LinkedList* pPets);
+
+
 #endif /* INC_CONTROLLER_H_ */

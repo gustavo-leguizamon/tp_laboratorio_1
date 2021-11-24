@@ -9,6 +9,8 @@ enum enumMainMenu {
 	optMainDeletePet,
 	optMainReportPets,
 	optMainSortPets,
+	optAddAppointment,
+	optOrderOfAppointment,
 	optMainSavePetsTextFile,
 	optMainSavePetsBinaryFile,
 	optMainExitMenu
