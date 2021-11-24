@@ -188,6 +188,17 @@ int main(void)
 					}
 				}
 				break;
+			case optAttendPet:
+				if (ll_isEmpty(listAppointments)){
+					puts("NO hay turnos cargados en el sistema");
+				}
+				else{
+					result = controller_attendPet(listAppointments);
+					if (result != 1){
+						puts("Ocurrio un error al atender el turno");
+					}
+				}
+				break;
 			case optMainSavePetsTextFile:
 				if (!ll_isEmpty(listPets)){
 					controller_loadNameOfFile(path, lenPath);

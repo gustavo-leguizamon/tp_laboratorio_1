@@ -327,7 +327,7 @@ int controller_saveAsBinary(char* path, LinkedList* pPets)
 int controller_addAppointment(LinkedList* pAppointments, LinkedList* pPets){
 	int result = 0;
 	int idPet;
-	int indexPet;
+	int indexPet = -1;
 	Pet* auxPet = NULL;
 
 	if (pAppointments != NULL && pPets != NULL){
@@ -362,7 +362,7 @@ int controller_addAppointment(LinkedList* pAppointments, LinkedList* pPets){
 int controller_orderOfAppointment(LinkedList* pAppointments, LinkedList* pPets){
 	int result = 0;
 	int idPet;
-	int indexPet;
+	int indexPet = -1;
 	Pet* auxPet = NULL;
 	int numberOfAppointment;
 
@@ -396,6 +396,27 @@ int controller_orderOfAppointment(LinkedList* pAppointments, LinkedList* pPets){
 		if (numberOfAppointment == -1){
 
 		}
+		result = 1;
+	}
+
+	return result;
+}
+
+
+
+int controller_attendPet(LinkedList* pAppointments){
+	int result = 0;
+	Pet* auxPet = NULL;
+
+	if (pAppointments != NULL){
+    	auxPet = (Pet*)ll_pop(pAppointments, 0);
+
+    	puts("\n******************************************************************************");
+    	puts("MASCOTA:");
+		pet_printHeaderReport();
+		pet_showPet(auxPet);
+		puts("");
+		puts("Atendida");
 		result = 1;
 	}
 

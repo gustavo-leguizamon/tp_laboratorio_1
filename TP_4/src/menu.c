@@ -18,6 +18,7 @@ int menu(){
 	printf("%d. Ordenar mascotas\n", optMainSortPets);
 	printf("%d. Agregar turno\n", optAddAppointment);
 	printf("%d. Orden de turno\n", optOrderOfAppointment);
+	printf("%d. Atender proxima mascota\n", optAttendPet);
 	printf("%d. Guardar los datos de las mascotas en el archivo .csv (modo texto)\n", optMainSavePetsTextFile);
 	printf("%d. Guardar los datos de las mascotas en el archivo .bin (modo binario)\n", optMainSavePetsBinaryFile);
 	printf("%d. Salir\n", optMainExitMenu);

@@ -110,4 +110,13 @@ int controller_addAppointment(LinkedList* pAppointments, LinkedList* pPets);
 int controller_orderOfAppointment(LinkedList* pAppointments, LinkedList* pPets);
 
 
+/**
+ * @brief Attend first pet in list of appointments
+ *
+ * @param pAppointments LinkedList*
+ * @return int 0: Error in parameters - 1: ok
+ */
+int controller_attendPet(LinkedList* pAppointments);
+
+
 #endif /* INC_CONTROLLER_H_ */
