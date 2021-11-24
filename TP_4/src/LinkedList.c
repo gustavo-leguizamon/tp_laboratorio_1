@@ -371,7 +371,7 @@ int ll_contains(LinkedList* this, void* pElement)
                         ( 1) Si los elementos de (this2) estan contenidos en la lista (this)
                         ( 0) si los elementos de (this2) NO estan contenidos en la lista (this)
 */
-int ll_containsAll(LinkedList* this,LinkedList* this2)
+int ll_containsAll(LinkedList* this, LinkedList* this2)
 {
     int returnAux = -1;
 

@@ -106,7 +106,7 @@ int controller_addPet(LinkedList* pPets, int* pNextId)
     	if (pet_chargeData(name)){
     		auxPet = pet_newParameters(*pNextId, name);
     		if (auxPet != NULL){
-    			if (ll_add(pPets, auxPet)){
+    			if (ll_add(pPets, auxPet) == 0){
         			*pNextId += 1;
         			result = 1;
     			}

@@ -54,6 +54,8 @@ int main(void)
     return 0;
     */
 
+	setbuf(stdout, NULL);
+
 
     int option;
 	int result;
