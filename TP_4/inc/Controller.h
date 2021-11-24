@@ -3,6 +3,14 @@
 
 
 /**
+ * @brief Request path of file to load
+ *
+ * @param fileName char*
+ * @return int 0: Error in parameters - 1: Ok
+ */
+int controller_loadNameOfFile(char* fileName, int len);
+
+/**
  * @brief Load data of pets from file data.csv (text mode).
  *
  * @param path char*
@@ -19,7 +27,7 @@ int controller_loadFromText(char* path, LinkedList* pPets);
  * @param pPets LinkedList*
  * @return int 0: Error to load file - 1: Ok - 2: Load cancelled by user - 3: Error to read file
  */
-int controller_loadFromBinary(char* path , LinkedList* pPets);
+int controller_loadFromBinary(char* path, LinkedList* pPets);
 
 
 

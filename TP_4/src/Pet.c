@@ -3,6 +3,8 @@
 #include <string.h>
 //#include <ctype.h>
 #include "../inc/Pet.h"
+#include "../inc/input.h"
+#include "../inc/myString.h"
 
 
 Pet* pet_new(){
@@ -101,4 +103,150 @@ int pet_delete(Pet* pPet){
 	}
 
 	return result;
+}
+
+
+int pet_findHighestId(LinkedList* pArrayLinkedList, int* pId){
+	int result = 0;
+	int highestId;
+	Pet* auxPet = NULL;
+
+	if (pArrayLinkedList != NULL && pId != NULL){
+		for (int i = 0; i < ll_len(pArrayLinkedList); i++){
+			auxPet = ll_get(pArrayLinkedList, i);
+			if (i == 0 || auxPet->id > highestId){
+				highestId = auxPet->id;
+			}
+		}
+
+		*pId = highestId + 1;
+		result = 1;
+	}
+
+	return result;
+}
+
+
+int pet_chargeData(char* pName){
+	int result = 0;
+
+	if (pName != NULL){
+
+		getString("Ingrese nombre: ", pName, 128);
+		while (strlen(pName) > 128){
+			puts("El nombre no es valido");
+			getString("Ingrese nombre: ", pName, 128);
+		}
+		capitalize(pName);
+		
+		result = 1;
+	}
+
+	return result;
+}
+
+
+
+void pet_printHeaderReport(){
+	printf("| %4s | %-20s |\n", "ID", "NOMBRE");
+}
+
+
+int pet_showPet(Pet* pPet){
+	int result = 0;
+	int id;
+	char name[128];
+
+	if (pPet != NULL &&
+		pet_getId(pPet, &id) &&
+		pet_getName(pPet, name)){
+		printf("| %4d | %-20s |\n", id, name);
+	}
+
+	return result;
+}
+
+
+int pet_showPets(LinkedList* pPets){
+	int result = 0;
+	Pet* auxPet = NULL;
+
+	if (pPets != NULL){
+		//printHeader(columns, lengths, lenColumns);
+		pet_printHeaderReport();
+		for (int i = 0; i < ll_len(pPets); i++){
+			auxPet = (Pet*)ll_get(pPets, i);
+			pet_showPet(auxPet);
+			//printFooter(lengths, lenColumns);
+		}
+		result = 1;
+	}
+
+    return result;
+}
+
+
+
+
+
+
+int pet_compareById(void* pPetA, void* pPetB){
+	int result = -2;
+	Pet* auxPetA = NULL;
+	Pet* auxPetB = NULL;
+
+	if (pPetA != NULL && pPetB != NULL){
+		auxPetA = (Pet*)pPetA;
+		auxPetB = (Pet*)pPetB;
+
+		if (auxPetA->id > auxPetB->id){
+			result = 1;
+		}
+		else if (auxPetA->id < auxPetB->id){
+			result = -1;
+		}
+		else{
+			result = 0;
+		}
+	}
+
+	return result;
+}
+
+
+int pet_compareByName(void* pPetA, void* pPetB){
+	int result = -2;
+	Pet* auxPetA = NULL;
+	Pet* auxPetB = NULL;
+
+	if (pPetA != NULL && pPetB != NULL){
+		auxPetA = (Pet*)pPetA;
+		auxPetB = (Pet*)pPetB;
+
+		result = strcmp(auxPetA->name, auxPetB->name);
+	}
+
+	return result;
+}
+
+
+
+
+int pet_validateId(LinkedList* pArrayLinkedList, int id){
+	int index = -1;
+	Pet* auxPet = NULL;
+	int length;
+
+	if (pArrayLinkedList != NULL){
+		length = ll_len(pArrayLinkedList);
+		for (int i = 0; i < length; i++){
+			auxPet = (Pet*)ll_get(pArrayLinkedList, i);
+			if (auxPet->id == id){
+				index = i;
+				break;
+			}
+		}
+	}
+
+	return index;
 }
